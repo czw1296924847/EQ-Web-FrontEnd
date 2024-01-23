@@ -1,0 +1,33 @@
+.ModelList-Button-Detail {
+    background-color: lightgrey;
+}
+
+.ModelList-Button-Train {
+    background-color: lightpink;
+}
+
+.ModelList-Button-Test {
+    background-color: lightskyblue;
+}
+
+.ModelList-Button-Distribution {
+    background-color: lightseagreen;
+}
+
+.ModelList-Button-Edit {
+    /*background-color: green;*/
+}
+
+.ModelList-Button-Label {
+    color: black;
+    text-decoration: none;
+    /*font-size: 20px;*/
+}
+
+.ModelList-Thead {
+  font-size: 23px;
+}
+
+.ModelList-Tbody {
+  font-size: 20px;
+}
