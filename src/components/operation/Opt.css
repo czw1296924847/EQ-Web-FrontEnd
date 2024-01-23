@@ -1,0 +1,56 @@
+.Model-Container {
+    margin-top: 1px;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+}
+
+.Model-Row {
+    margin-top: 20px;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+}
+
+.Model-Label {
+    display: flex;
+    margin-top: 20px;
+    font-size: 20px;
+    margin-bottom: 5px;
+    /*align-items: center; !* 垂直居中 *!*/
+}
+
+.Model-Input {
+    font-size: 20px;
+    display: flex;
+    /*align-items: center; !* 垂直居中 *!*/
+}
+
+.Model-Output {
+    font-size: 20px;
+    /*padding: 5px;*/
+    /*margin-bottom: 10px;*/
+}
+
+.Opt-Title {
+    display: flex;
+    justify-content: center;
+    /*padding-right: 150px;*/
+}
+
+.Opt-Train-Button {
+    /*margin-left: -150px;*/
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.Opt-Input-Title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: -20px;
+}
+
+.Opt-Output-Title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: -20px;
+}
