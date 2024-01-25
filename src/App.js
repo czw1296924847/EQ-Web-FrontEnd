@@ -21,7 +21,7 @@ import "./App.css";
 function App() {
     const [la, setLa] = useState(getStoredLanguage() || "en");
 
-    const models = ["MagInfoNet", "EQGraphNet", "MagNet", "CREIME", "ConvNetQuake_INGV"]
+    const models = ["MagInfoNet", "EQGraphNet", "MagNet", "CREIME", "ConvNetQuakeINGV"]
     const opts = ["train", "test"];
 
     return (
