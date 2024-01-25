@@ -1,6 +1,3 @@
-import {ESTIMATE_URL} from "../index";
-import axios from "axios";
-
 export function getStoredLanguage() {
     return localStorage.getItem('la');
 }
@@ -15,7 +12,7 @@ const Trans_ModelDetail_En = {
     'version': 'Version',
     'owner': 'Owner',
     'created_at': 'Created Time',
-    'situation': 'Situation',
+    'process': 'Process',
 };
 
 const Trans_ModelDetail_Zh = {
@@ -28,7 +25,7 @@ const Trans_ModelDetail_Zh = {
     'version': '版本',
     'owner': '作者',
     'created_at': '时间',
-    'situation': '状态',
+    'process': '过程',
 };
 
 export function Trans_ModelDetail(la) {
@@ -61,4 +58,14 @@ export function Trans_Login_Msg(la) {
     } else {
         throw new Error(`Unknown type of 'la'! ${la}`);
     }
+}
+
+
+export const catContent = (content, addContent) => {
+    if (content === "") {
+        content = addContent;
+    } else {
+        content = content + "\n" + addContent;
+    }
+    return content;
 }

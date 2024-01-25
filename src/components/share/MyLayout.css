@@ -62,10 +62,12 @@
 }
 
 .MyLayout-H1-Model {
+    font-weight: bold;
     color: black;
 }
 
 .MyLayout-H1-Opt {
+    font-weight: bold;
     color: mediumvioletred;
     text-decoration: none;
 }
@@ -75,5 +77,6 @@
 }
 
 .MyLayout-H1-Inform {
+    font-weight: bold;
     color: black;
 }

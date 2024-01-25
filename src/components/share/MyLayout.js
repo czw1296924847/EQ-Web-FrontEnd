@@ -82,7 +82,7 @@ const MyLayout = ({children}) => {
                                 background={colorBgContainer}
                                 la={la}/>
 
-                    <Layout style={{padding: '0 24px 24px',}}>
+                    <Layout style={{padding: '0px 24px 24px',}}>
                         <Breadcrumb style={{margin: '15px 0',}}>
                             {/*<Breadcrumb.Item>Input</Breadcrumb.Item>*/}
                         </Breadcrumb>
