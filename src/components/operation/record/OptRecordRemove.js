@@ -1,12 +1,15 @@
-import React, {Component, Fragment, useState} from "react";
+import React, {useState, useContext} from "react";
 import {Modal, ModalHeader, Button, ModalFooter} from "reactstrap";
-
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import "./OptRecord.css";
+import LanguageContext from "../../LanguageContext";
+import {Trans_OptRecordForm} from "../utils";
 
 
 const OptRecordRemove = ({train_ratio, data_size, sm_scale, chunk_name, resetState}) => {
+    const {la, _} = useContext(LanguageContext);
+
     const url = window.location.href.split('/').slice(2);
     const [modal, setModal] = useState(false);
     const [model_name, setModelName] = useState(url[url.length - 3]);
@@ -23,30 +26,30 @@ const OptRecordRemove = ({train_ratio, data_size, sm_scale, chunk_name, resetSta
                 resetState();
                 toggle();
             }).catch(error => {
-                console.error(error);
+            console.error(error);
         });
     };
 
 
     return (
-        <Fragment>
+        <div>
             <Button className="OptRecord-Button-Label"
                     onClick={() => toggle()}
                     color="danger">Delete</Button>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>
-                    Do you really wanna delete the record?
+                    {Trans_OptRecordForm(la)['want_delete']}
                 </ModalHeader>
 
                 <ModalFooter>
                     <Button onClick={() => toggle()}
-                            type="button">Cancel</Button>
+                            type="button">{Trans_OptRecordForm(la)['no']}</Button>
                     <Button onClick={() => deleteRecord()}
                             color="primary"
-                            type="button">Yes</Button>
+                            type="button">{Trans_OptRecordForm(la)['yes']}</Button>
                 </ModalFooter>
             </Modal>
-        </Fragment>
+        </div>
     );
 }
 

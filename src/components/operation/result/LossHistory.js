@@ -1,18 +1,18 @@
-import React, {useState} from "react";
-import {Col, Container, Row} from "reactstrap";
+import React, {useContext} from "react";
 import {Line} from '@ant-design/plots';
-import {UpperFirst, WIDTH_PLOT} from "../utils";
+import {WIDTH_PLOT, Trans_OptResult} from "../utils";
+import LanguageContext from "../../LanguageContext";
 
 
-const LossHistory = ({data, opt}) => {
-
+const LossHistory = ({data}) => {
+    const {la, _} = useContext(LanguageContext);
 
     const config = {
         data: data,
         xField: 'x',
         yField: 'y',
         width: WIDTH_PLOT,
-        title: `Mean Squared Loss during ${UpperFirst(opt)}ing`,
+        title: Trans_OptResult(la)['loss_title'],
         point: {
             size: 5,
             shape: 'diamond',
@@ -24,11 +24,11 @@ const LossHistory = ({data, opt}) => {
         },
         axis: {
             x: {
-                title: 'Epoch',
+                title: Trans_OptResult(la)['epochs'],
                 titleFill: 'black'
             },
             y: {
-                title: 'Loss',
+                title: Trans_OptResult(la)['loss'],
                 titleFill: 'black'
             },
         },

@@ -1,50 +1,47 @@
 import {ESTIMATE_URL} from "../../index";
-import {useContext} from "react";
-import LanguageContext from "../LanguageContext";
+import {Button, Tooltip} from 'antd';
 import axios from "axios";
+import {Trans_ModelList} from "../home/utils";
+import "../home/list/ModelList.css";
+import {catStr, getParam, getParams, isExistRecord} from "./OptParam";
+import {catContent} from "../func";
+
+export const WIDTH_OUTPUT_LONG = "1000px";
+export const WIDTH_PLOT = 600;
+
 
 const TRAIN_COL_PARAM_SHORT = 6;
-const TRAIN_COL_PARAM_MID = 9;
 const TRAIN_COL_PARAM_LONG = 12
 
 const TRAIN_COL_RESULT_SHORT = 6;
 const TRAIN_COL_RESULT_LONG = 24;
-const TRAIN_COL_RESULT_STATUS = 24;
 
 const TRAIN_WIDTH_INPUT_SHORT = "200px";
-const TRAIN_WIDTH_INPUT_MID = "400px";
 const TRAIN_WIDTH_INPUT_LONG = "700px";
 
 const TRAIN_WIDTH_OUTPUT_SHORT = "200px";
-export const TRAIN_WIDTH_OUTPUT_LONG = "1000px";
 
 
 const TEST_COL_PARAM_SHORT = 6;
-const TEST_COL_PARAM_MID = 9;
 const TEST_COL_PARAM_LONG = 12;
 
 const TEST_COL_RESULT_SHORT = 6;
-const TEST_COL_RESULT_LONG = 24;
 const TEST_COL_RESULT_STATUS = 24;
 
 const TEST_WIDTH_INPUT_SHORT = "200px";
-const TEST_WIDTH_INPUT_MID = "400px";
 const TEST_WIDTH_INPUT_LONG = "700px";
 
 const TEST_WIDTH_OUTPUT_SHORT = "200px";
-export const TEST_WIDTH_OUTPUT_LONG = "1000px";
-export const WIDTH_PLOT = 600;
 
-
-const NUM_TRAIN_INPUT = 10;
+const NUM_TRAIN_INPUT = 9;
 const NUM_TRAIN_OUTPUT = 5;
-const NUM_TEST_INPUT = 6;
+const NUM_TEST_INPUT = 5;
 const NUM_TEST_OUTPUT = 5;
 
 
 export const INFOS = ["home", "inform"]
 export const OPTS = ["train", "test"];
-export const STYLES = ["record", "result"];
+export const OPTSTYLES = ["record", "result"];
 
 
 const Trans_OptParam_En = {
@@ -62,6 +59,20 @@ const Trans_OptParam_En = {
     'unknown_error': 'Unknown Error!',
     'train_error': 'Training Error',
     'test_error': 'Training Error',
+    'go_detail_page': 'Go Detail Page',
+    'go_train_page': 'Go Training Page',
+    'go_test_page': 'Go Testing Page',
+    'go_info_page': 'Go Information Page',
+    'train': 'Train',
+    'test': 'Test',
+    'training': 'Training',
+    'testing': 'Testing',
+    'result': 'Result',
+    'record': 'Record',
+    'not_found_train': 'The model has not been trained!',
+    'epoch': 'Epoch',
+    'rmse': 'RMSE',
+    'r2': 'R2',
 };
 
 const Trans_OptParam_Zh = {
@@ -79,6 +90,20 @@ const Trans_OptParam_Zh = {
     'unknown_error': '未知错误！',
     'train_error': '训练错误',
     'test_error': '测试错误',
+    'go_detail_page': '前往详情页面',
+    'go_train_page': '前往训练页面',
+    'go_test_page': '前往测试页面',
+    'go_info_page': '前往信息页面',
+    'train': '训练',
+    'test': '测试',
+    'training': '训练',
+    'testing': '测试',
+    'result': '结果',
+    'record': '记录',
+    'not_found_train': '模型尚未训练！',
+    'epoch': '轮数',
+    'rmse': '均方根误差',
+    'r2': '决定系数',
 };
 
 export function Trans_OptParam(la) {
@@ -161,7 +186,7 @@ const Trans_Model_Output_Label_En = {
     'e_std': 'Error Std',
     'pred': 'Predicted Magnitude',
     'true': 'True Magnitude',
-    'situation': 'Situation',
+    'process': 'Process',
 };
 
 const Trans_Model_Output_Label_Zh = {
@@ -171,7 +196,7 @@ const Trans_Model_Output_Label_Zh = {
     'e_std': '误差标准差',
     'pred': '估计震级',
     'true': '真实震级',
-    'situation': '状态',
+    'process': '过程',
 };
 
 export function Trans_Model_Output_Label(la) {
@@ -191,6 +216,9 @@ const Trans_OptRecordForm_En = {
     'sm_scale': 'Magnitude Scale',
     'chunk_name': 'Chunk Name',
     'operation': 'Operation',
+    'want_delete': 'Do you really wanna delete the record?',
+    'yes': 'Yes',
+    'no': 'No',
 };
 
 const Trans_OptRecordForm_Zh = {
@@ -199,6 +227,9 @@ const Trans_OptRecordForm_Zh = {
     'sm_scale': '震级类型',
     'chunk_name': '数据集',
     'operation': '操作',
+    'want_delete': '是否确定删除该项记录？',
+    'yes': '是',
+    'no': '否',
 };
 
 export function Trans_OptRecordForm(la) {
@@ -212,20 +243,61 @@ export function Trans_OptRecordForm(la) {
 }
 
 
+const Trans_OptResult_En = {
+    'comp': 'Result',
+    'loss': 'Loss',
+    'compare_title': 'Compare True and Predicted Magnitude',
+    'loss_title': 'Mean Squared Loss during Training',
+    'true': 'True Magnitude',
+    'pred': 'Predicted Magnitude',
+    'epochs': 'Epochs',
+    'run': 'Run',
+    'start_run_train': 'Start Training',
+    'start_run_test': 'Start Testing',
+    'start_comp': 'Plot the true and predicted magnitudes',
+    'start_loss': 'Plot the loss during training',
+    'train_record_not': 'Training record does not exist',
+    'test_record_not': 'Testing record does not exist',
+}
+
+const Trans_OptResult_Zh = {
+    'comp': '结果',
+    'loss': '损失',
+    'compare_title': '真实震级与估计震级的比较',
+    'loss_title': '训练期间的均方误差',
+    'true': '真实震级',
+    'pred': '估计震级',
+    'epochs': '迭代轮数',
+    'run': '运行',
+    'start_run_train': '开始训练',
+    'start_run_test': '开始测试',
+    'start_comp': '绘制真实震级与估计震级',
+    'start_loss': '绘制训练期间的损失',
+    'train_record_not': '训练记录不存在',
+    'test_record_not': '测试记录不存在',
+}
+
+export function Trans_OptResult(la) {
+    if (la === "en") {
+        return Trans_OptResult_En;
+    } else if (la === "zh") {
+        return Trans_OptResult_Zh;
+    } else {
+        throw new Error("Unknown type of 'la'!");
+    }
+}
+
+
 export function getSpanInput(i, len, style) {
     if (style === "train") {
         if (i < NUM_TRAIN_INPUT) {
             return TRAIN_COL_PARAM_SHORT;
-        } else if (i === NUM_TRAIN_INPUT) {
-            return TRAIN_COL_PARAM_MID;
         } else {
             return TRAIN_COL_PARAM_LONG
         }
     } else if (style === "test") {
         if (i < NUM_TEST_INPUT) {
             return TEST_COL_PARAM_SHORT;
-        } else if (i === NUM_TEST_INPUT) {
-            return TEST_COL_PARAM_MID;
         } else {
             return TEST_COL_PARAM_LONG
         }
@@ -238,16 +310,12 @@ export function getWidthInput(i, len, style) {
     if (style === "train") {
         if (i < NUM_TRAIN_INPUT) {
             return TRAIN_WIDTH_INPUT_SHORT;
-        } else if (i === NUM_TRAIN_INPUT) {
-            return TRAIN_WIDTH_INPUT_MID;
         } else {
             return TRAIN_WIDTH_INPUT_LONG;
         }
     } else if (style === "test") {
         if (i < NUM_TEST_INPUT) {
             return TEST_WIDTH_INPUT_SHORT;
-        } else if (i === (NUM_TEST_INPUT)) {
-            return TEST_WIDTH_INPUT_MID;
         } else {
             return TEST_WIDTH_INPUT_LONG;
         }
@@ -260,16 +328,12 @@ export function getSpanOutput(i, len, style) {
     if (style === "train") {
         if (i < NUM_TRAIN_OUTPUT) {
             return TRAIN_COL_RESULT_SHORT;
-        } else if (i === NUM_TRAIN_OUTPUT) {
-            return TRAIN_COL_RESULT_LONG;
         } else {
-            return TRAIN_COL_RESULT_STATUS;
+            return TRAIN_COL_RESULT_LONG;
         }
     } else if (style === "test") {
         if (i < NUM_TEST_OUTPUT) {
             return TEST_COL_RESULT_SHORT;
-        } else if (i === NUM_TEST_OUTPUT) {
-            return TEST_COL_RESULT_LONG;
         } else {
             return TEST_COL_RESULT_STATUS;
         }
@@ -282,43 +346,22 @@ export function getWidthOutput(i, len, style) {
     if (style === "train") {
         if (i < NUM_TRAIN_OUTPUT) {
             return TRAIN_WIDTH_OUTPUT_SHORT;
-        } else if (i === NUM_TRAIN_OUTPUT) {
-            return TRAIN_WIDTH_OUTPUT_LONG;
         } else {
-            return TRAIN_WIDTH_OUTPUT_LONG;
+            return WIDTH_OUTPUT_LONG;
         }
     } else if (style === "test") {
         if (i < NUM_TEST_OUTPUT) {
             return TEST_WIDTH_OUTPUT_SHORT;
-        } else if (i === NUM_TEST_OUTPUT) {
-            return TEST_WIDTH_OUTPUT_LONG;
         } else {
-            return TEST_WIDTH_OUTPUT_LONG;
+            return WIDTH_OUTPUT_LONG;
         }
     } else {
         throw new Error("Unknown 'style', must be 'train' or 'test'!");
     }
 }
 
-export function UpperFirst(str) {
-    if (str.length === 0) {
-        return str;
-    }
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 export function TrainTest(str) {
     return str === 'train' ? 'test' : 'train';
-}
-
-export function tran_word(str) {
-    if (OPTS.includes(str)) {
-        return UpperFirst(str) + 'ing';
-    } else if (['result'].includes(str)) {
-        return UpperFirst(str);
-    } else {
-        throw new Error("Unknown 'str'")
-    }
 }
 
 export function isInRecord(record, params) {
@@ -326,47 +369,50 @@ export function isInRecord(record, params) {
     return keys.every(key => params.find(item => item.name === key && item.value === record[key]));
 }
 
-export function replaceOpt(opt, url, style) {
-    if (!['train', 'test'].includes(opt)) {
-        throw new Error("Unknown type of 'opt', must be 'train' or 'test'!");
-    }
-    if (style === "param") {
-        url[url.length - 1] = opt === 'train' ? 'test' : 'train';
-    } else if (STYLES.includes(style)) {
-        url[url.length - 2] = opt === 'train' ? 'test' : 'train';
-    } else {
-        throw new Error("Unknown type of 'style'!")
-    }
-    return url.slice(1).join('/');
-}
-
-export function checkRecord(model_name, opt, params, la) {
-
-    return new Promise((resolve, reject) => {
-        axios.get(ESTIMATE_URL + model_name + "/" + opt).then(response => {
-            let shouldContinue = true;
-            let hasMatchedRecord = false;
-            response.data.some(infos => {
-                if (infos.model_name === model_name) {
-                    hasMatchedRecord = infos.record.some(record => {
-                        if (isInRecord(record, params)) {
-                            shouldContinue = window.confirm(Trans_OptParam(la)[`overwrite_${opt}`]);
-                            return true;
-                        }
-                        return false;
-                    });
-                    return true;
-                }
-                return false;
-            });
-            resolve(shouldContinue);
-        }).catch(error => {
-            reject(error);
-        });
-    });
-}
-
 export function getStateValue(metrics, responseData) {
     const desiredKeys = metrics.map(metric => metric.name);
     return desiredKeys.map(key => ({name: key, value: responseData[key]}));
+}
+
+export function splitProcess(process) {
+    if (process === "") return "";
+    const pairs = process.split(',').map(pair => pair.split(':'));
+    return pairs.reduce((res, [key, value]) => ({...res, [key]: value}), {});
+}
+
+
+export function tranProcess(process, la) {
+    return `${Trans_OptParam(la)['epoch']}  =  ${process['epoch']}\t\t${Trans_OptParam(la)['rmse']}  =  ${process['rmse']}\t\t${Trans_OptParam(la)['r2']}  =  ${process['r2']}`;
+}
+
+
+export function UrlButton(getModelUrl, la, model_name, toPath, class_name, style) {
+    return (
+        <Tooltip title={Trans_OptParam(la)[`go_${toPath}_page`]}>
+            <Button className={class_name} size={"large"} style={style}>
+                <span className="ModelList-Button-Label"
+                      onClick={() => getModelUrl(model_name, toPath)}>
+                    {Trans_ModelList(la)[toPath]}
+                </span>
+            </Button>
+        </Tooltip>
+    )
+}
+
+export function OptButton(onClick, la, opt, class_name, style, doStyle) {
+    let tooltip = doStyle;
+    if (doStyle === "run") {
+        tooltip = doStyle + `_${opt}`;
+    }
+
+    return (
+        <Tooltip title={Trans_OptResult(la)[`start_${tooltip}`]}>
+            <Button className={class_name} size={"large"} style={style}>
+                <span className="ModelList-Button-Label"
+                      onClick={onClick}>
+                    {Trans_OptResult(la)[doStyle]}
+                </span>
+            </Button>
+        </Tooltip>
+    )
 }

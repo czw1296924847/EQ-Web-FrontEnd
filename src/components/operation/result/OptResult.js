@@ -1,13 +1,11 @@
 import React, {useState, useEffect, useContext} from "react";
-import {getParams, OptInput, OptTitle} from "../OptParam";
-import {Col, Container, Row} from "reactstrap";
+import {getParams, OptInput, OptTitle, isExistRecord, GUTTER_SIZE} from "../OptParam";
+import {Container} from "reactstrap";
 import LanguageContext from "../../LanguageContext";
-import {Input} from 'antd';
+import {Row, Col, Input, Alert} from 'antd';
 import {
-    getSpanInput, getWidthInput,
-    replaceOpt, TrainTest, UpperFirst, tran_word,
-    getStateValue,
-    Trans_Model_Output_Label, Trans_ModelTrain_Input_Label,
+    getWidthInput, Trans_OptResult, getStateValue,
+    Trans_Model_Output_Label
 } from "../utils";
 
 import axios from "axios";
@@ -37,94 +35,127 @@ const OptResult = () => {
     ]);
     const [true_pred, setTruePred] = useState([]);
     const [loss, setLoss] = useState([]);
-    const [style, setStyle] = useState("result");
+    const [optStyle, setOptStyle] = useState("result");
     const [show_who, setShowWho] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
+    const [msg, setMsg] = useState("");
 
-    const getTruePred = () => {
-        const acc = getParams(params);
-        axios.get(ESTIMATE_URL + model_name + "/" + opt +
-            `/true_pred?train_ratio=${acc['train_ratio']}&data_size=${acc['data_size']}&sm_scale=${acc['sm_scale']}&chunk_name=${acc['chunk_name']}`)
-            .then(response => {
-                const responseData = response.data;
-                setResults(getStateValue(results, responseData));
-                setTruePred(responseData.points);
-                setShowWho("true_pred");
-            })
-            .catch(error => {
-                console.error(error);
-            });
+    const getComp = async () => {
+        setShowWho("");
+        const useParams = getParams(params);
+        const {train_ratio, data_size, sm_scale, chunk_name} = useParams;
+        try {
+            if (await isExistRecord(model_name, opt, train_ratio, data_size, sm_scale, chunk_name)) {
+                axios.get(ESTIMATE_URL + model_name + "/" + opt +
+                    `/true_pred?train_ratio=${useParams['train_ratio']}&data_size=${useParams['data_size']}&sm_scale=${useParams['sm_scale']}&chunk_name=${useParams['chunk_name']}`)
+                    .then(response => {
+                        const responseData = response.data;
+                        setResults(getStateValue(results, responseData));
+                        setTruePred(responseData.points);
+                        setShowWho("true_pred");
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            } else {
+                setShowAlert(true);
+                setMsg(Trans_OptResult(la)[`${opt}_record_not`]);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    const getLoss = () => {
-        const acc = getParams(params);
-        axios.get(ESTIMATE_URL + model_name + "/" + opt +
-            `/loss?train_ratio=${acc['train_ratio']}&data_size=${acc['data_size']}&sm_scale=${acc['sm_scale']}&chunk_name=${acc['chunk_name']}`)
-            .then(response => {
-                const responseData = response.data;
-                setLoss(responseData);
-                setShowWho("loss");
-            })
-            .catch(error => {
-                console.error(error);
-            });
+    const getLoss = async () => {
+        setShowWho("");
+        const useParams = getParams(params);
+        const {train_ratio, data_size, sm_scale, chunk_name} = useParams;
+        try {
+            if (await isExistRecord(model_name, opt, train_ratio, data_size, sm_scale, chunk_name)) {
+                axios.get(ESTIMATE_URL + model_name + "/" + opt +
+                    `/loss?train_ratio=${useParams['train_ratio']}&data_size=${useParams['data_size']}&sm_scale=${useParams['sm_scale']}&chunk_name=${useParams['chunk_name']}`)
+                    .then(response => {
+                        const responseData = response.data;
+                        setLoss(responseData);
+                        setShowWho("loss");
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            } else {
+                setShowAlert(true);
+                setMsg(Trans_OptResult(la)[`${opt}_record_not`]);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    const handleInputChange = (e, index) => {
-        const value = e.target.value;
+    const onClose = () => {
+        setShowAlert(false);
+        setMsg("");
+    }
+
+    const handleInputChange = (value, index) => {
         const newParams = [...params];
         newParams[index - 1] = {...newParams[index - 1], value};
         setParams(newParams);
     }
 
     return (
-        <Container>
-            <Row>
-                <OptTitle model_name={model_name}
+        <Container className="Model-Container">
+            <OptTitle model_name={model_name}
                       opt={opt}
-                      url={url}
-                      style={style}/>
-            </Row>
+                      optStyle={optStyle}
+                      getComp={getComp}
+                      getLoss={getLoss}/>
 
-            <Row className="Model-Row">
+            <Row className="Opt-Row" gutter={GUTTER_SIZE}>
                 <OptInput params={params}
-                               opt={opt}
-                               la={la}
-                               offset={1}
-                               handleInputChange={handleInputChange}/>
+                          opt={opt}
+                          la={la}
+                          offset={1}
+                          onChange={handleInputChange}/>
             </Row>
 
-            <Row className="Model-Row">
-                <Col>
-                    <button onClick={getTruePred}>Compare</button>
-                </Col>
-                <Col>
-                    {opt !== "test" && <button onClick={getLoss}>Loss</button>}
-                </Col>
-            </Row>
+            <br/><br/>
 
-            <Row>
-                <Col>
-                    {show_who === "true_pred" && <CompTruePred data={true_pred}/>}
-                    {show_who === "loss" && <LossHistory data={loss}
-                                                         opt={opt}/>}
-                </Col>
+            <div className="Opt-Result">
+                <Row>
+                    <Col style={{marginRight: 40}}>
+                        {show_who === "true_pred" && <CompTruePred data={true_pred}/>}
+                        {show_who === "loss" && <LossHistory data={loss}/>}
+                    </Col>
 
-                <Col>
-                    {show_who === "true_pred" && (
-                        Array.from({length: results.length}, (_, index) => index + 1).map((i) => (
-                            <Row span={getSpanInput(i, results.length, "train")} key={i}>
-                                <label className="ModelResult-Label">
-                                    {Trans_Model_Output_Label(la)[results[i - 1]?.name]}</label>
-                                <Input className="ModelResult-Input"
-                                       type="text"
-                                       style={{width: getWidthInput(i, results.length, "train"),}}
-                                       name={results[i - 1]?.name}
-                                       value={results[i - 1]?.value}/>
-                            </Row>
-                        ))
-                    )}
-                </Col>
-            </Row>
+                    <Col>
+                        {show_who === "true_pred" && (
+                            Array.from({length: results.length}, (_, index) => index + 1).map((i) => (
+                                <Row
+                                    // span={getSpanInput(i, results.length, "train")}
+                                    key={i}>
+                                    <div className="OptResult-Metrics">
+                                        <label className="OptResult-Label">
+                                            {Trans_Model_Output_Label(la)[results[i - 1]?.name]}</label>
+                                        <Input className="OptResult-Input"
+                                               type="text"
+                                               style={{width: getWidthInput(i, results.length, "train"),}}
+                                               name={results[i - 1]?.name}
+                                               value={results[i - 1]?.value}/>
+                                    </div>
+                                </Row>
+                            ))
+                        )}
+                    </Col>
+                </Row>
+
+                {showAlert &&
+                    <Alert className="OptResult-Alert"
+                           message={msg}
+                           type="error"
+                           showIcon
+                           closable
+                           onClose={onClose}/>}
+            </div>
         </Container>
     );
 }

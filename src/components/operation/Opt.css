@@ -4,13 +4,11 @@
     /*flex-direction: column;*/
 }
 
-.Model-Row {
+.Opt-Row {
     margin-top: 20px;
-    /*display: flex;*/
-    /*justify-content: space-between;*/
 }
 
-.Model-Label {
+.Opt-Label {
     display: flex;
     margin-top: 20px;
     font-size: 20px;
@@ -18,9 +16,9 @@
     /*align-items: center; !* 垂直居中 *!*/
 }
 
-.Model-Input {
+.Opt-Output {
     font-size: 20px;
-    display: flex;
+    /*display: flex;*/
     /*align-items: center; !* 垂直居中 *!*/
 }
 
@@ -36,10 +34,27 @@
     /*padding-right: 150px;*/
 }
 
-.Opt-Train-Button {
+.Opt-Run-Button {
     /*margin-left: -150px;*/
-    margin-top: 30px;
+    background-color: lightgrey;
+    margin-top: 60px;
     font-size: 20px;
+}
+
+.Opt-Comp-Button {
+    /*margin-left: -150px;*/
+    background-color: lightskyblue;
+    margin-top: 60px;
+    font-size: 20px;
+    margin-bottom: -20px;
+}
+
+.Opt-Loss-Button {
+    /*margin-left: -150px;*/
+    background-color: lightpink;
+    margin-top: 60px;
+    font-size: 20px;
+    margin-bottom: -20px;
 }
 
 .Opt-Input-Title {
@@ -53,4 +68,12 @@
     font-weight: bold;
     margin-top: 50px;
     margin-bottom: -20px;
+}
+
+.Opt-Result {
+    display: flex;
+    justify-content: center;
+}
+
+.OptParam-Input {
 }
