@@ -1,6 +1,12 @@
 .title-text {
-    font-size: 28px;
+    /*font-size: 38px;*/
     text-align: center;
+    font-weight: bold;
+}
+
+.Information-Table-Title {
+    text-align: center;
+    font-size: 35px;
     font-weight: bold;
 }
 

@@ -1,4 +1,15 @@
 
+.ModelDetail-Title {
+    display: flex;
+    justify-content: center;
+    /*padding-right: 150px;*/
+}
+
+.ModelDetail-H1-Model {
+    font-weight: bold;
+    color: black;
+}
+
 .ModelDetailForm-thead {
   font-size: 23px;
 }
@@ -10,4 +21,18 @@
 
 .ModelDetailForm-Value {
   font-size: 20px;
+}
+
+.ModelDetail-Train-Button {
+    /*margin-left: -150px;*/
+    background-color: lightpink;
+    margin-top: 40px;
+    font-size: 20px;
+}
+
+.ModelDetail-Test-Button {
+    /*margin-left: -150px;*/
+    background-color: lightskyblue;
+    margin-top: 40px;
+    font-size: 20px;
 }

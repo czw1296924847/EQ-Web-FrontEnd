@@ -25,19 +25,6 @@ const FeatureList = ({features, resetState}) => {
     const [msg, setMsg] = useState("");
     const [showAlert, setShowAlert] = useState(true);
 
-    // useEffect(() => {
-    //     const handleClickOutside = (event) => {
-    //         if (event.target.closest('.alert') === null) {
-    //             setMsg("");
-    //             setShowAlert(false);
-    //         }
-    //     };
-    //     document.addEventListener('click', handleClickOutside);
-    //     return () => {
-    //         document.removeEventListener('click', handleClickOutside);
-    //     };
-    // }, []);
-
     const handleShowChart = (feature) => {
         setFeature(feature);
         setMsg('wait_cal');

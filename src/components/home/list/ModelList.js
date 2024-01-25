@@ -1,17 +1,25 @@
 import React, {useContext} from "react";
-import {Table, } from "reactstrap";
-import {Button} from 'antd';
+import {useNavigate} from 'react-router-dom';
+import {Table,} from "reactstrap";
+import {Button, Tooltip} from 'antd';
 // import {Table} from 'antd';
 import ModelNew from "../edit/ModelNew";
 import ModelRemove from "../remove/ModelRemove";
 import "./ModelList.css";
 import LanguageContext from "../../LanguageContext";
 import {Trans_ModelList} from "../utils";
+import {UrlButton, Trans_OptParam} from "../../operation/utils";
 
 
 const ModelList = ({models, resetState}) => {
     const {la, _} = useContext(LanguageContext);
+    const navigate = useNavigate();
+
     const color_th = "dimgray";
+
+    const getModelUrl = (model_name, toPath) => {
+        navigate(`/${model_name}/${toPath}`);
+    }
 
     return (
         <Table>
@@ -44,24 +52,11 @@ const ModelList = ({models, resetState}) => {
                                 {/*/>*/}
                                 {/*&nbsp;&nbsp;*/}
                                 {/*<ModelRemove pk={model.pk} resetState={resetState}/>*/}
-
-                                <Button className="ModelList-Button-Train" size={"large"}>
-                                    <a className="ModelList-Button-Label"
-                                       href={`/${model.name}/train`}>
-                                        {Trans_ModelList(la)['train']}</a>
-                                </Button>
+                                {UrlButton(getModelUrl, la, model.name, "train", "ModelList-Button-Train", {})}
                                 &nbsp;&nbsp;
-                                <Button className="ModelList-Button-Test" size={"large"}>
-                                    <a className="ModelList-Button-Label"
-                                       href={`/${model.name}/test`}>
-                                        {Trans_ModelList(la)['test']}</a>
-                                </Button>
+                                {UrlButton(getModelUrl, la, model.name, "test", "ModelList-Button-Test", {})}
                                 &nbsp;&nbsp;
-                                <Button className="ModelList-Button-Detail" size={"large"}>
-                                    <a className="ModelList-Button-Label"
-                                       href={`/${model.name}/detail`}>
-                                        {Trans_ModelList(la)['detail']}</a>
-                                </Button>
+                                {UrlButton(getModelUrl, la, model.name, "detail", "ModelList-Button-Detail", {})}
                             </td>
                         </tr>
                     )

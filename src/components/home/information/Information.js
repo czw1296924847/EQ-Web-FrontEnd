@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Col, Container, Row} from "reactstrap";
+import {Container} from "reactstrap";
+import {Col} from 'antd';
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import ModelList from "../list/ModelList";
@@ -40,33 +41,28 @@ const Information = () => {
     };
 
     return (
-        <Container>
-            <Row>
-                <span className="title-text">{Trans_ModelList(la)['model_info']}</span>
-                <Col>
-                    <ModelList
-                        models={models}
-                        resetState={resetState}
-                    />
-                </Col>
-            </Row>
+        <Container className="Model-Container">
+            <h1 style={{textAlign: 'center'}}>
+                <span className="Information-Table-Title">{Trans_ModelList(la)['model_info']}</span>
+            </h1>
+            <Col>
+                <ModelList
+                    models={models}
+                    resetState={resetState}
+                />
+            </Col>
 
-            {/*<Row>*/}
-            {/*    <Col>*/}
-            {/*        <ModelNew create={true} resetState={resetState}/>*/}
-            {/*    </Col>*/}
-            {/*</Row>*/}
             <br/><br/>
 
-            <Row>
-                <span className="title-text">{Trans_ModelList(la)['feature_info']}</span>
-                <Col>
-                    <FeatureList
-                        features={features}
-                        resetState={resetState}
-                    />
-                </Col>
-            </Row>
+            <h1 style={{textAlign: 'center'}}>
+                <span className="Information-Table-Title">{Trans_ModelList(la)['feature_info']}</span>
+            </h1>
+            <Col>
+                <FeatureList
+                    features={features}
+                    resetState={resetState}
+                />
+            </Col>
 
         </Container>
     );

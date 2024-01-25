@@ -23,7 +23,7 @@ const Login = () => {
     const [type, setType] = useState("login");
     const [showAlert, setShowAlert] = useState(true);
     const [isLogin, setIsLogin] = useState(false);
-    const [returnURL, setReturnURL] = useState(state?.returnURL || '/home');
+    const [returnURL, setReturnURL] = useState(state?.returnURL || '/inform');
 
     useEffect(() => {
         const handleClickOutside = (event) => {
