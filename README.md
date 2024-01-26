@@ -4,5 +4,17 @@
 Its backend framework is [EQ-Web-BackEnd](https://github.com/zw-Ch/EQ-Web-BackEnd)<br>
 
 ## Installation
-**EQ-Web-FrontEnd**  is based on [React](https://react.dev/), [Antd](https://ant-design.antgroup.com/index-cn), [AntV](https://ant-design-charts.antgroup.com/) and so on. You can obtain relevant tutorials from [Using React with Django to create an app: Tutorial](https://blog.logrocket.com/using-react-django-create-app-tutorial/#building-react-app).<br> <br>
-Firstly please create a react app for yourself<br>
+**EQ-Web-FrontEnd**  is based on [React](https://react.dev/) and [Antd](https://ant-design.antgroup.com/index-cn). You can obtain relevant tutorials from [Using React with Django to create an app: Tutorial](https://blog.logrocket.com/using-react-django-create-app-tutorial/#building-react-app).<br> <br>
+Firstly please confirm you have installed [Node.js](https://nodejs.p2hp.com/) and [npm](https://npm.p2hp.com/), here is an optional tutorial: [https://zhuanlan.zhihu.com/p/47977487](https://zhuanlan.zhihu.com/p/47977487). <br>
+Then you can create a react app for yourself <br>
+```
+npx create-react-app EQ-Web
+```
+There are some packages need to be installed<br>
+```
+npm install bootstrap reactstrap axios --save
+npm install react-dom --save
+npm install react-router-dom --save
+npm install antd --save
+npm install @ant-design/charts --save
+```
