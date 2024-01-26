@@ -18,3 +18,10 @@ npm install react-router-dom --save
 npm install antd --save
 npm install @ant-design/charts --save
 ```
+
+## Get Start
+After completing all the configurations, you can enter the project and initiate it
+```
+cd EQ-web
+npm run start
+```
