@@ -1,14 +1,10 @@
 import React, {useContext} from "react";
 import {useNavigate} from 'react-router-dom';
 import {Table,} from "reactstrap";
-import {Button, Tooltip} from 'antd';
-// import {Table} from 'antd';
-import ModelNew from "../edit/ModelNew";
-import ModelRemove from "../remove/ModelRemove";
 import "./ModelList.css";
 import LanguageContext from "../../LanguageContext";
 import {Trans_ModelList} from "../utils";
-import {UrlButton, Trans_OptParam} from "../../operation/utils";
+import {UrlButton} from "../../operation/OptParam";
 
 
 const ModelList = ({models, resetState}) => {
@@ -45,13 +41,6 @@ const ModelList = ({models, resetState}) => {
                             <td>{model.description}</td>
                             <td>{model.owner}</td>
                             <td>
-                                {/*<ModelNew*/}
-                                {/*    create={false}*/}
-                                {/*    model={model}*/}
-                                {/*    resetState={resetState}*/}
-                                {/*/>*/}
-                                {/*&nbsp;&nbsp;*/}
-                                {/*<ModelRemove pk={model.pk} resetState={resetState}/>*/}
                                 {UrlButton(getModelUrl, la, model.name, "train", "ModelList-Button-Train", {})}
                                 &nbsp;&nbsp;
                                 {UrlButton(getModelUrl, la, model.name, "test", "ModelList-Button-Test", {})}

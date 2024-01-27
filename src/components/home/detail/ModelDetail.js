@@ -1,13 +1,14 @@
 import React, {useState, useEffect, useContext} from "react";
 import {useNavigate} from 'react-router-dom';
 import {Col, Container, Row} from "reactstrap";
-import {Button, Tooltip} from "antd";
+import {Tooltip} from "antd";
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import ModelDetailForm from "./ModelDetailForm";
 import LanguageContext from "../../LanguageContext";
 import {Trans_ModelList} from "../utils";
-import {UrlButton, Trans_OptParam} from "../../operation/utils";
+import {Trans_OptParam} from "../../operation/utils";
+import {UrlButton} from "../../operation/OptParam";
 
 
 const ModelDetail = () => {
