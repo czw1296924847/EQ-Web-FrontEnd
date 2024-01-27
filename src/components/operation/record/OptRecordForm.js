@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useContext} from "react";
 import LanguageContext from "../../LanguageContext";
 import {Table} from "reactstrap";
 import OptRecordRemove from "./OptRecordRemove";

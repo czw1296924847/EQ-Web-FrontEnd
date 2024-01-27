@@ -24,11 +24,11 @@ const CompTruePred = ({data}) => {
         axis: {
             x: {
                 title: Trans_OptResult(la)['true'],
-                titleFill: 'black'
+                titleFill: 'black',
             },
             y: {
                 title: Trans_OptResult(la)['pred'],
-                titleFill: 'black'
+                titleFill: 'black',
             },
         },
     };

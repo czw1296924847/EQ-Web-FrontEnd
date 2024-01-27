@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useContext} from "react";
-import {getParams, OptInput, OptTitle, isExistRecord, GUTTER_SIZE} from "../OptParam";
+import {OptInput, OptTitle, GUTTER_SIZE} from "../OptParam";
 import {Container} from "reactstrap";
 import LanguageContext from "../../LanguageContext";
 import {Row, Col, Input, Alert} from 'antd';
 import {
     getWidthInput, Trans_OptResult, getStateValue,
-    Trans_Model_Output_Label
+    Trans_Model_Output_Label, isExistRecord, getParams,
 } from "../utils";
 
 import axios from "axios";

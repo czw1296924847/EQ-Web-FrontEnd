@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Container} from "reactstrap";
-import {Row, Col} from 'antd';
+import {Row} from 'antd';
 import {ESTIMATE_URL} from "../../../index";
 import axios from "axios";
 import OptRecordForm from "./OptRecordForm";

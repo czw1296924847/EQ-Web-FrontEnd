@@ -3,7 +3,6 @@ import {Button, Tooltip} from 'antd';
 import axios from "axios";
 import {Trans_ModelList} from "../home/utils";
 import "../home/list/ModelList.css";
-import {catStr, getParam, getParams, isExistRecord} from "./OptParam";
 import {catContent} from "../func";
 
 export const WIDTH_OUTPUT_LONG = "1000px";
@@ -386,33 +385,89 @@ export function tranProcess(process, la) {
 }
 
 
-export function UrlButton(getModelUrl, la, model_name, toPath, class_name, style) {
-    return (
-        <Tooltip title={Trans_OptParam(la)[`go_${toPath}_page`]}>
-            <Button className={class_name} size={"large"} style={style}>
-                <span className="ModelList-Button-Label"
-                      onClick={() => getModelUrl(model_name, toPath)}>
-                    {Trans_ModelList(la)[toPath]}
-                </span>
-            </Button>
-        </Tooltip>
-    )
+export const isExistRecord = async (model_name, opt, train_ratio, data_size, sm_scale, chunk_name) => {
+    return new Promise((resolve, reject) => {
+        axios.get(ESTIMATE_URL + model_name + "/" + opt +
+            `/record?train_ratio=${train_ratio}&data_size=${data_size}&sm_scale=${sm_scale}&chunk_name=${chunk_name}`)
+            .then(response => {
+                resolve(response.data);
+            }).catch(error => {
+            console.error(error);
+            reject(error);
+        });
+    });
 }
 
-export function OptButton(onClick, la, opt, class_name, style, doStyle) {
-    let tooltip = doStyle;
-    if (doStyle === "run") {
-        tooltip = doStyle + `_${opt}`;
+
+export async function checkRecord(model_name, opt, params, la) {
+    const useParams = getParams(params);
+    const train_ratio = useParams['train_ratio'];
+    const data_size = useParams['data_size'];
+    const sm_scale = useParams['sm_scale'];
+    const chunk_name = useParams['chunk_name'];
+
+    const isExist = await isExistRecord(model_name, opt, train_ratio, data_size, sm_scale, chunk_name);
+
+    return new Promise((resolve, reject) => {
+        let shouldContinue = true;
+        if (isExist) {
+            shouldContinue = window.confirm(Trans_OptParam(la)[`overwrite_${opt}`]);
+        }
+        resolve(shouldContinue);
+    })
+}
+
+
+export const getCalTime = (data_size, sm_scale) => {
+    let time = 100;
+    if (data_size === "200000" && sm_scale === "ml") {
+        time = 8000;
     }
-
-    return (
-        <Tooltip title={Trans_OptResult(la)[`start_${tooltip}`]}>
-            <Button className={class_name} size={"large"} style={style}>
-                <span className="ModelList-Button-Label"
-                      onClick={onClick}>
-                    {Trans_OptResult(la)[doStyle]}
-                </span>
-            </Button>
-        </Tooltip>
-    )
+    return time;
 }
+
+
+export const onCloseAlert = (e, setShowAlert, setStatus, setProcess) => {
+    setShowAlert(false);
+    setStatus("");
+    setProcess("");
+    console.log(e, "Close Alert.")
+}
+
+export const catStr = (str, num = 20) => {
+    return '='.repeat(num) + `  ${str}  ` + "=".repeat(num);
+};
+
+
+export const getParam = (params, name) => {
+    for (let i = 0; i < params.length; i++) {
+        if (params[i].name === name) {
+            return params[i].value;
+        }
+    }
+    throw new Error(`${name} is not found in params!`)
+}
+
+
+export const getParams = (params) => {
+    return params.reduce((acc, info) => {
+        acc[info.name] = info.value;
+        return acc;
+    }, {});
+}
+
+export const resetResults = (results, setResults, setProcess) => {
+    setResults(results.map(result => ({
+        ...result,
+        value: "",
+    })));
+    setProcess("");
+}
+
+export const resetProcess = (status, setProcess, la) => {
+    if (status === "") {
+        setProcess("");
+    } else {
+        setProcess('='.repeat(20) + `  ${Trans_OptParam(la)[status]}  ` + "=".repeat(20));
+    }
+};

@@ -1,14 +1,17 @@
 import React, {useEffect, useState, useContext} from "react";
 import {
-    OptInput, OptOutput, OptTitle, OptAlert, checkRecord, resetProcess, OptProcess,
-    catStr, getParams, resetResults, GUTTER_SIZE, getParam, getCalTime,
+    OptInput, OptOutput, OptTitle, OptAlert, OptProcess,
+    GUTTER_SIZE,
 } from "../OptParam";
 import {Container} from "reactstrap";
 import LanguageContext from "../../LanguageContext";
 import {Row} from 'antd';
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
-import {getStateValue, Trans_OptParam, splitProcess, tranProcess} from "../utils";
+import {
+    getStateValue, Trans_OptParam, splitProcess, tranProcess, checkRecord, getParam, getCalTime,
+    catStr, getParams, resetResults, resetProcess,
+} from "../utils";
 import "../Opt.css";
 import "../../Alert.css";
 import {catContent} from "../../func";
@@ -54,7 +57,8 @@ const TrainParam = () => {
         // resetProcess(status, setProcess, la);
         if (!isEnd && model_name) {
             const data_size = getParam(params, "data_size");
-            interval = setInterval(getProcess, getCalTime(data_size));
+            const sm_scale = getParam(params, "sm_scale");
+            interval = setInterval(getProcess, getCalTime(data_size, sm_scale));
             getProcess();
         }
     }, [la, isEnd]);
@@ -87,8 +91,7 @@ const TrainParam = () => {
                 setProcess(content);
                 setIsEnd(true);
                 clearInterval(interval);
-            }
-            else if (process['epoch'] === `${epoch}`) {     // still in this epoch
+            } else if (process['epoch'] === `${epoch}`) {     // still in this epoch
                 content = catContent(content, tranProcess(process, la))
                 setProcess(content);
                 epoch = epoch + 1;
@@ -176,6 +179,11 @@ const TrainParam = () => {
             </Row>
 
             <Row>
+                <OptProcess process={process}
+                            la={la}/>
+            </Row>
+
+            <Row>
                 <span className="Opt-Output-Title">{Trans_OptParam(la)['output_param']}</span>
             </Row>
             <Row className="Opt-Row" gutter={GUTTER_SIZE}>
@@ -185,10 +193,6 @@ const TrainParam = () => {
                            offset={1}/>
             </Row>
 
-            <Row>
-                <OptProcess process={process}
-                            la={la}/>
-            </Row>
         </Container>
     );
 };

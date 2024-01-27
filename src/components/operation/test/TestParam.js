@@ -1,14 +1,16 @@
 import React, {useEffect, useState, useContext} from "react";
 import {
-    OptInput, OptOutput, OptProcess, OptTitle, checkRecord,
-    catStr, getParams, resetResults, resetProcess, OptAlert, GUTTER_SIZE,
+    OptInput, OptOutput, OptProcess, OptTitle, OptAlert, GUTTER_SIZE,
 } from "../OptParam";
 import {Container} from "reactstrap";
 import LanguageContext from "../../LanguageContext";
 import {Row} from 'antd';
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
-import {getStateValue, Trans_OptParam,} from "../utils";
+import {
+    getStateValue, Trans_OptParam, checkRecord,
+    catStr, getParams, resetResults, resetProcess,
+} from "../utils";
 import "../Opt.css";
 import "../../Alert.css";
 
@@ -115,6 +117,11 @@ const TestParam = () => {
             </Row>
 
             <Row>
+                <OptProcess process={process}
+                            la={la}/>
+            </Row>
+
+            <Row>
                 <span className="Opt-Output-Title">{Trans_OptParam(la)['output_param']}</span>
             </Row>
             <Row className="Opt-Row" gutter={GUTTER_SIZE}>
@@ -122,11 +129,6 @@ const TestParam = () => {
                            opt={opt}
                            la={la}
                            offset={1}/>
-            </Row>
-
-            <Row>
-                <OptProcess process={process}
-                              la={la}/>
             </Row>
         </Container>
     );

@@ -1,17 +1,16 @@
 import React, {useContext, useState, useEffect} from "react";
 import {useNavigate} from 'react-router-dom';
-import axios from "axios";
-import {Col, Input, Tooltip, Select, InputNumber, ConfigProvider, Alert} from 'antd';
+import {Col, Input, Tooltip, Select, InputNumber, ConfigProvider, Alert, Button} from 'antd';
 import {
-    getSpanInput, getSpanOutput, getWidthInput, getWidthOutput,
-    TrainTest, Trans_Model_Output_Label,
-    Trans_ModelTrain_Input_Label, Trans_ModelTest_Input_Label, Trans_OptParam,
-    OPTSTYLES, OptButton, WIDTH_OUTPUT_LONG,
+    getSpanInput, getSpanOutput, getWidthInput, getWidthOutput, TrainTest,
+    Trans_Model_Output_Label, Trans_ModelTrain_Input_Label,
+    Trans_ModelTest_Input_Label, Trans_OptParam, Trans_OptResult,
+    OPTSTYLES, WIDTH_OUTPUT_LONG, onCloseAlert,
 } from "./utils";
 import "../share/MyLayout.css";
 import "./Opt.css";
 import LanguageContext from "../LanguageContext";
-import {ESTIMATE_URL} from "../../index";
+import {Trans_ModelList} from "../home/utils";
 
 
 const OptParam = () => {
@@ -23,63 +22,9 @@ const OptParam = () => {
 }
 export default OptParam;
 
-const { TextArea } = Input;
+const {TextArea} = Input;
 
 export const GUTTER_SIZE = 100;
-
-
-export const isExistRecord = async (model_name, opt, train_ratio, data_size, sm_scale, chunk_name) => {
-    return new Promise((resolve, reject) => {
-        axios.get(ESTIMATE_URL + model_name + "/" + opt +
-            `/record?train_ratio=${train_ratio}&data_size=${data_size}&sm_scale=${sm_scale}&chunk_name=${chunk_name}`)
-            .then(response => {
-                resolve(response.data);
-            }).catch(error => {
-            console.error(error);
-            reject(error);
-        });
-    });
-}
-
-
-export async function checkRecord(model_name, opt, params, la) {
-    const useParams = getParams(params);
-    const train_ratio = useParams['train_ratio'];
-    const data_size = useParams['data_size'];
-    const sm_scale = useParams['sm_scale'];
-    const chunk_name = useParams['chunk_name'];
-
-    const isExist = await isExistRecord(model_name, opt, train_ratio, data_size, sm_scale, chunk_name);
-
-    return new Promise((resolve, reject) => {
-        let shouldContinue = true;
-        if (isExist) {
-            shouldContinue = window.confirm(Trans_OptParam(la)[`overwrite_${opt}`]);
-        }
-        resolve(shouldContinue);
-    })
-}
-
-
-export const getCalTime = (data_size) => {
-    let time = 100;
-    if (data_size === "200000") {
-        time = 4000;
-    }
-    return time;
-}
-
-
-export const onCloseAlert = (e, setShowAlert, setStatus, setProcess) => {
-    setShowAlert(false);
-    setStatus("");
-    setProcess("");
-    console.log(e, "Close Alert.")
-}
-
-export const catStr = (str, num = 20) => {
-    return '='.repeat(num) + `  ${str}  ` + "=".repeat(num);
-};
 
 // export const handleInputChange = (e, index, params, setParams) => {
 //     const value = e.target.value;
@@ -89,38 +34,36 @@ export const catStr = (str, num = 20) => {
 // }
 
 
-export const getParam = (params, name) => {
-    for (let i = 0; i < params.length; i++) {
-        if (params[i].name === name) {
-            return params[i].value;
-        }
+export function UrlButton(getModelUrl, la, model_name, toPath, class_name, style) {
+    return (
+        <Tooltip title={Trans_OptParam(la)[`go_${toPath}_page`]}>
+            <Button className={class_name} size={"large"} style={style}>
+                <span className="ModelList-Button-Label"
+                      onClick={() => getModelUrl(model_name, toPath)}>
+                    {Trans_ModelList(la)[toPath]}
+                </span>
+            </Button>
+        </Tooltip>
+    )
+}
+
+export function OptButton(onClick, la, opt, class_name, style, doStyle) {
+    let tooltip = doStyle;
+    if (doStyle === "run") {
+        tooltip = doStyle + `_${opt}`;
     }
-    throw new Error(`${name} is not found in params!`)
+
+    return (
+        <Tooltip title={Trans_OptResult(la)[`start_${tooltip}`]}>
+            <Button className={class_name} size={"large"} style={style}>
+                <span className="ModelList-Button-Label"
+                      onClick={onClick}>
+                    {Trans_OptResult(la)[doStyle]}
+                </span>
+            </Button>
+        </Tooltip>
+    )
 }
-
-
-export const getParams = (params) => {
-    return params.reduce((acc, info) => {
-        acc[info.name] = info.value;
-        return acc;
-    }, {});
-}
-
-export const resetResults = (results, setResults, setProcess) => {
-    setResults(results.map(result => ({
-        ...result,
-        value: "",
-    })));
-    setProcess("");
-}
-
-export const resetProcess = (status, setProcess, la) => {
-    if (status === "") {
-        setProcess("");
-    } else {
-        setProcess('='.repeat(20) + `  ${Trans_OptParam(la)[status]}  ` + "=".repeat(20));
-    }
-};
 
 
 export const OptTitle = ({model_name, opt, optStyle, onClick, getComp, getLoss}) => {
@@ -318,8 +261,8 @@ export const OptProcess = ({process, la}) => {
         <Col>
             <label className="Opt-Label">{Trans_Model_Output_Label(la)['process']}</label>
             <TextArea className="Opt-Output" autoSize={true}
-                   style={{width: WIDTH_OUTPUT_LONG}}
-                   value={process}/>
+                      style={{width: WIDTH_OUTPUT_LONG}}
+                      value={process}/>
         </Col>
     )
 }
