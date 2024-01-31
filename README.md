@@ -17,6 +17,9 @@ npm install react-dom --save
 npm install react-router-dom --save
 npm install antd --save
 npm install @ant-design/charts --save
+npm install react-syntax-highlighter --save
+npm install @antv/l7 --save
+npm install @antv/l7-maps --save
 ```
 
 ## Get Start
