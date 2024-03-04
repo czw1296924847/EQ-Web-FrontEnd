@@ -3,10 +3,8 @@ import {HomeOutlined, CloudUploadOutlined, CloudDownloadOutlined} from '@ant-des
 import {Menu} from 'antd';
 import {Link} from 'react-router-dom';
 import "./Header.css";
+import {DEFAULT_MODELS} from "../func";
 
-
-// Used Models
-const links = ['MagInfoNet', 'EQGraphNet', 'MagNet', 'CREIME', 'ConvNetQuakeINGV'];
 
 // Navigation Menu
 const items = [
@@ -19,7 +17,7 @@ const items = [
         label: <span className="train-icon">Train</span>,
         key: 'train',
         icon: <CloudUploadOutlined/>,
-        children: links.map(link => ({
+        children: DEFAULT_MODELS.map(link => ({
             label: <Link to={`/${link}/train`} rel="noopener noreferrer">{link}</Link>,
             key: `${link}-train`,
         })),
@@ -28,7 +26,7 @@ const items = [
         label: <span className="test-icon">Test</span>,
         key: 'test',
         icon: <CloudDownloadOutlined className="train-icon"/>,
-        children: links.map(link => ({
+        children: DEFAULT_MODELS.map(link => ({
             label: <Link to={`/${link}/test`} rel="noopener noreferrer">{link}</Link>,
             key: `${link}-test`,
         })),
