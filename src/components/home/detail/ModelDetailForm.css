@@ -11,28 +11,58 @@
 }
 
 .ModelDetailForm-thead {
-  font-size: 23px;
+    font-size: 23px;
 }
 
 .ModelDetailForm-Item {
-  width: 200px;
-  font-size: 20px;
+    width: 130px;
+    font-size: 18px;
 }
 
 .ModelDetailForm-Value {
-  font-size: 20px;
+    max-width: 900px;
+    font-size: 17px;
+}
+
+.ModelDetailForm-Opt {
+    width: 110px;
+    font-size: 18px;
 }
 
 .ModelDetail-Train-Button {
     /*margin-left: -150px;*/
-    background-color: lightpink;
+    background-color: hotpink;
     margin-top: 40px;
     font-size: 20px;
 }
 
 .ModelDetail-Test-Button {
     /*margin-left: -150px;*/
-    background-color: lightskyblue;
+    background-color: cornflowerblue;
     margin-top: 40px;
     font-size: 20px;
 }
+
+.ModelDetail-Edit-Button {
+    width: 80px;
+    background-color: lightseagreen;
+}
+
+.ModelDetail-Upload-Button {
+    width: 80px;
+    margin-top: 10px;
+    background-color: darkorange;
+}
+
+.ModelDetail-Run-Button {
+    width: 80px;
+    margin-top: 10px;
+    background-color: grey;
+}
+
+.ModelDetail-Button-Label-Text {
+    color: white;
+    font-size: 14px;
+    /*font-size: 20px;*/
+}
+

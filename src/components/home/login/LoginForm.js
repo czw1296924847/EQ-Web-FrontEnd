@@ -5,23 +5,21 @@ import LanguageContext from "../../LanguageContext";
 import {Trans_Login, getLeftUserPass} from "../utils";
 
 
-const LoginForm = ({ onSubmit, usernameState, passwordState }) => {
+const LoginForm = ({ onSubmit, username, password, setUsername, setPassword }) => {
     const {la, _} = useContext(LanguageContext);
     const {left_u, left_p} = getLeftUserPass(la);
 
     const handleUsernameChange = (event) => {
-        usernameState = event.target.value;
+        setUsername(event.target.value);
     };
 
     const handlePasswordChange = (event) => {
-        passwordState = event.target.value;
+        setPassword(event.target.value);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onSubmit({ username: usernameState, password: passwordState });
-        usernameState = "";
-        passwordState = "";
+        onSubmit({ username: username, password: password });
     };
 
     return (
@@ -33,7 +31,7 @@ const LoginForm = ({ onSubmit, usernameState, passwordState }) => {
                         className="LoginForm-Input"
                         style={{marginLeft: `${left_u}px`}}
                         type="text"
-                        value={usernameState}
+                        value={username}
                         onChange={handleUsernameChange}
                     />
                 </label>
@@ -46,7 +44,7 @@ const LoginForm = ({ onSubmit, usernameState, passwordState }) => {
                         className="LoginForm-Input"
                         style={{marginLeft: `${left_p}px`}}
                         type="password"
-                        value={passwordState}
+                        value={password}
                         onChange={handlePasswordChange}
                     />
                 </label>

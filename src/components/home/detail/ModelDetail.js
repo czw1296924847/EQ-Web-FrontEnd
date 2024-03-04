@@ -60,7 +60,7 @@ const ModelDetail = () => {
                     {UrlButton(getModelUrl, la, model_name, "train", "ModelDetail-Train-Button", {marginLeft: `-${size}px`})}
                 </div>
                 <Col>
-                    <ModelDetailForm infos={infos}/>
+                    <ModelDetailForm infos={infos} resetState={resetState}/>
                 </Col>
             </Row>
 
