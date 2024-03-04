@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useEffect, useState, useContext, Fragment} from "react";
 import {
     OptInput, OptOutput, OptTitle, OptAlert, OptProcess,
     GUTTER_SIZE,
@@ -10,11 +10,11 @@ import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import {
     getStateValue, Trans_OptParam, splitProcess, tranProcess, checkRecord, getParam, getCalTime,
-    catStr, getParams, resetResults, resetProcess,
+    catStr, getParams, resetResults,
 } from "../utils";
 import "../Opt.css";
 import "../../Alert.css";
-import {catContent} from "../../func";
+import {catContent, clearProcess, DEFAULT_MODELS} from "../../func";
 
 const TrainParam = () => {
     const {la, _} = useContext(LanguageContext);
@@ -26,10 +26,10 @@ const TrainParam = () => {
         {name: "device", value: "cuda:1"},
         {name: "lr", value: "0.0005"},
         {name: "batch_size", value: "64"},
-        {name: "epochs", value: "3"},
+        {name: "epochs", value: "10"},
         {name: "train_ratio", value: "0.75"},
         {name: "data_size", value: "200000"},
-        {name: "sm_scale", value: "md"},
+        {name: "sm_scale", value: "ml"},
         {name: "chunk_name", value: "chunk2"},
     ]);
     const [results, setResults] = useState([
@@ -48,32 +48,24 @@ const TrainParam = () => {
     const [isHovered, setIsHovered] = useState(false);
     const [optStyle, setOptStyle] = useState("param");
     const [isEnd, setIsEnd] = useState(true);
+    const [isDefaultModel, setIsDefaultModel] = useState(DEFAULT_MODELS.includes(model_name));
 
     let interval = null;
     let epoch = 0;
+    let end = false;
     let content = "";
 
     useEffect(() => {
-        // resetProcess(status, setProcess, la);
+        resetProcess()
+    }, [la, isEnd]);
+
+    const resetProcess = () => {
         if (!isEnd && model_name) {
             const data_size = getParam(params, "data_size");
             const sm_scale = getParam(params, "sm_scale");
             interval = setInterval(getProcess, getCalTime(data_size, sm_scale));
             getProcess();
         }
-    }, [la, isEnd]);
-
-    const clearProcess = async () => {
-        return new Promise((resolve, reject) => {
-            axios.put(ESTIMATE_URL + `${model_name}` + "/process")
-                .then(response => {
-                    resolve(response.data);
-                })
-                .catch(error => {
-                    console.error(error);
-                    reject(error);
-                });
-        });
     }
 
     const getProcess = () => {
@@ -85,13 +77,14 @@ const TrainParam = () => {
             if (content === "") {        // start training
                 content = catContent(content, catStr(Trans_OptParam(la)['start']));
                 setProcess(content);
-            } else if (process['epoch'] === `${epochs - 1}`) {      // last epoch in training
+            } else if (process['epoch'] === `${epochs - 1}` && !end) {      // last epoch in training
                 content = catContent(content, tranProcess(process, la))
                 content = catContent(content, catStr(Trans_OptParam(la)['end']))
                 setProcess(content);
                 setIsEnd(true);
+                end = true;
                 clearInterval(interval);
-            } else if (process['epoch'] === `${epoch}`) {     // still in this epoch
+            } else if (process['epoch'] === `${epoch}` && !end) {     // still in this epoch
                 content = catContent(content, tranProcess(process, la))
                 setProcess(content);
                 epoch = epoch + 1;
@@ -103,7 +96,7 @@ const TrainParam = () => {
 
     const trainModel = async () => {
         setIsEnd(false);        // Start monitoring the train process
-        await clearProcess();
+        await clearProcess(model_name);
         // setProcess("");
 
         resetResults(results, setResults, setProcess);
@@ -112,16 +105,12 @@ const TrainParam = () => {
             setMsg(Trans_OptParam(la)[`start_${opt}`]);
             setStatus("start");
             setTypeAlert("success");
-            // setProcess(catStr(Trans_OptParam(la)['start']));
             setShowAlert(true);
 
             axios.post(ESTIMATE_URL + model_name + "/" + opt, getParams(params))
                 .then(response => {
-
-                    const responseData = response.data;
                     setStatus("end");
-                    setResults(getStateValue(results, responseData));
-                    // setProcess(catStr(Trans_OptParam(la)['end']));
+                    setResults(getStateValue(results, response.data));
 
                     setShowAlert(false);
                     console.log("Success!");
@@ -157,17 +146,21 @@ const TrainParam = () => {
                       optStyle={optStyle}
                       onClick={trainModel}/>
 
-            <Row>
-                <span className="Opt-Input-Title">{Trans_OptParam(la)['input_param']}</span>
-            </Row>
+            {isDefaultModel &&
+                <Fragment>
+                    <Row>
+                        <span className="Opt-Input-Title">{Trans_OptParam(la)['input_param']}</span>
+                    </Row>
 
-            <Row className="Opt-Row" gutter={GUTTER_SIZE}>
-                <OptInput params={params}
-                          opt={opt}
-                          la={la}
-                          offset={1}
-                          onChange={handleInputChange}/>
-            </Row>
+                    <Row className="Opt-Row" gutter={GUTTER_SIZE}>
+                        <OptInput params={params}
+                                  opt={opt}
+                                  la={la}
+                                  offset={1}
+                                  onChange={handleInputChange}/>
+                    </Row>
+                </Fragment>}
+
 
             <Row className="Opt-Row">
                 <OptAlert showAlert={showAlert}
@@ -182,17 +175,18 @@ const TrainParam = () => {
                 <OptProcess process={process}
                             la={la}/>
             </Row>
-
-            <Row>
-                <span className="Opt-Output-Title">{Trans_OptParam(la)['output_param']}</span>
-            </Row>
-            <Row className="Opt-Row" gutter={GUTTER_SIZE}>
-                <OptOutput results={results}
-                           opt={opt}
-                           la={la}
-                           offset={1}/>
-            </Row>
-
+            {isDefaultModel &&
+                <Fragment>
+                    <Row>
+                        <span className="Opt-Output-Title">{Trans_OptParam(la)['output_param']}</span>
+                    </Row>
+                    <Row className="Opt-Row" gutter={GUTTER_SIZE}>
+                        <OptOutput results={results}
+                                   opt={opt}
+                                   la={la}
+                                   offset={1}/>
+                    </Row>
+                </Fragment>}
         </Container>
     );
 };

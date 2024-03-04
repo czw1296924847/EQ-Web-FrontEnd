@@ -4,6 +4,14 @@
     /*flex-direction: column;*/
 }
 
+.Train-Container {
+    margin-left: 30%;
+}
+
+.Test-Container {
+    margin-left: 30%;
+}
+
 .Opt-Row {
     margin-top: 20px;
 }

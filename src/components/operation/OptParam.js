@@ -24,7 +24,7 @@ export default OptParam;
 
 const {TextArea} = Input;
 
-export const GUTTER_SIZE = 100;
+export const GUTTER_SIZE = 135;
 
 // export const handleInputChange = (e, index, params, setParams) => {
 //     const value = e.target.value;
@@ -37,8 +37,11 @@ export const GUTTER_SIZE = 100;
 export function UrlButton(getModelUrl, la, model_name, toPath, class_name, style) {
     return (
         <Tooltip title={Trans_OptParam(la)[`go_${toPath}_page`]}>
-            <Button className={class_name} size={"large"} style={style}>
-                <span className="ModelList-Button-Label"
+            <Button className={class_name}
+                    size={"large"}
+                    style={style}
+                    onClick={() => getModelUrl(model_name, toPath)}>
+                <span className="ModelList-Button-Label-Text"
                       onClick={() => getModelUrl(model_name, toPath)}>
                     {Trans_ModelList(la)[toPath]}
                 </span>
@@ -56,7 +59,7 @@ export function OptButton(onClick, la, opt, class_name, style, doStyle) {
     return (
         <Tooltip title={Trans_OptResult(la)[`start_${tooltip}`]}>
             <Button className={class_name} size={"large"} style={style}>
-                <span className="ModelList-Button-Label"
+                <span className="ModelList-Button-Label-Text"
                       onClick={onClick}>
                     {Trans_OptResult(la)[doStyle]}
                 </span>

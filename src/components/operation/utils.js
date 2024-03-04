@@ -422,6 +422,8 @@ export const getCalTime = (data_size, sm_scale) => {
     let time = 100;
     if (data_size === "200000" && sm_scale === "ml") {
         time = 8000;
+    } else if (data_size === "200000" && sm_scale === "md") {
+        time = 3000;
     }
     return time;
 }
@@ -464,10 +466,3 @@ export const resetResults = (results, setResults, setProcess) => {
     setProcess("");
 }
 
-export const resetProcess = (status, setProcess, la) => {
-    if (status === "") {
-        setProcess("");
-    } else {
-        setProcess('='.repeat(20) + `  ${Trans_OptParam(la)[status]}  ` + "=".repeat(20));
-    }
-};

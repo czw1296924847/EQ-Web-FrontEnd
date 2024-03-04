@@ -9,7 +9,7 @@ import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import {
     getStateValue, Trans_OptParam, checkRecord,
-    catStr, getParams, resetResults, resetProcess,
+    catStr, getParams, resetResults,
 } from "../utils";
 import "../Opt.css";
 import "../../Alert.css";
@@ -44,8 +44,16 @@ const TestParam = () => {
     const [optStyle, setOptStyle] = useState("param");
 
     useEffect(() => {
-        resetProcess(status, setProcess, la);
+        resetProcess();
     }, [la]);
+
+    const resetProcess = () => {
+        if (status === "") {
+            setProcess("");
+        } else {
+            setProcess('='.repeat(20) + `  ${Trans_OptParam(la)[status]}  ` + "=".repeat(20));
+        }
+    };
 
     const testModel = async () => {
         resetResults(results, setResults, setProcess);
