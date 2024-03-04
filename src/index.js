@@ -4,9 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from 'react-router-dom'
 
-export const ESTIMATE_URL = "http://10.181.8.163:8000/estimate/magnitude/";
+export const ESTIMATE_URL = "http://10.181.8.163:8000/estimate/";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
