@@ -35,12 +35,12 @@ then go to the web page <br>
 ```
 where in our example, host = 127.0.0.1 and port = 8080. Then you will see <br>
 
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/inform.png)<br>
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/inform.png)<br><br>
 
 ### 2. Change Language
 You can change the language including `English` and `Chinese` in **setting** >> **Language** <br>
 
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/change_language.png)<br>
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/change_language.png)<br><br>
 
 ### 3. Magnitude Estimation
 We provide some deep learning models for magnitude estimation, and the used dataset can be downloaded from [https://github.com/smousavi05/STEAD](https://github.com/smousavi05/STEAD). <br>
@@ -50,31 +50,31 @@ Select one of `MagInfoNet`, `EQGraphNet`, `MagNet`, `CREIME`, `ConvNetQuakeINGV`
 #### 3.1. Model Training
 Click $\text{\color{pink}{Train}}$ button, go to the `Param` page and you can set paramter values <br>
 
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_param.png) <br>
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_param.png) <br><br>
 
 Then click $\text{\color{grey}{Run}}$ button, the model start training. You can monitor the training process in `Process` <br>
 
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_run.png) <br>
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_run.png) <br><br>
 
 and see the training metrics including `coefficient of determination (R2)` and `root mean square error (RMSE)`
 
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_output.png) <br>
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_output.png) <br><br>
 
 #### 3.2. Model Testing
 After model training on given paramters, you can click $\text{\color{pink}{Training}}$ content in **Title** and for model testing <br>
 
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/go_test.png) <br>
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/go_test.png) <br><br>
 
 then ensure the parameters are consistent with **Model Training** and click $\text{\color{grey}{Run}}$ button
 
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_run.png) <br>
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_run.png) <br><br>
 
 #### 3.3. Draw Results
 You can go to the `Result` page to show results. Click $\text{\color{blue}{Result}}$ button to show the estimated results and true magnitudes. <br>
 
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_result.png) <br>
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_result.png) <br><br>
 
 #### 3.4. Operation Record
 You can go to the `Record` page to view the training and testing records of given model under different parameters. <br>
 
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_record.png) <br>
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_record.png) <br><br>
