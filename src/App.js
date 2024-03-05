@@ -16,7 +16,7 @@ import ModelDetail from "./components/home/detail/ModelDetail";
 import OptRecord from "./components/operation/record/OptRecord";
 import NotFound from "./components/share/error/NotFound";
 import LanguageContext from "./components/LanguageContext";
-import {getStoredLanguage, arrayEqual, DEFAULT_OPTS} from "./components/func";
+import {getStoredLanguage, arrayEqual, DEFAULT_OPTS, DEFAULT_MODELS} from "./components/func";
 import "./App.css";
 import {ESTIMATE_URL} from "./index";
 
@@ -68,12 +68,12 @@ function App() {
                                element={<MyLayout> <ReLogin> <ModelDetail/> </ReLogin> </MyLayout>}/>
                     ))}
 
-                    {models.map((model, _) => (
+                    {DEFAULT_MODELS.map((model, _) => (
                         <Route path={`/${model}/train`}
                                element={<MyLayout> <ReLogin> <TrainParam/> </ReLogin> </MyLayout>}/>
                     ))}
 
-                    {models.map((model, _) => (
+                    {DEFAULT_MODELS.map((model, _) => (
                         <Route path={`/${model}/test`}
                                element={<MyLayout> <ReLogin> <TestParam/> </ReLogin> </MyLayout>}/>
                     ))}
