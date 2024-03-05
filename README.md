@@ -52,7 +52,7 @@ Click $\text{\color{hotpink}{Train}}$ button, go to the `Param` page and you can
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_param.png) <br><br>
 
-Then click $\text{\color{grey}{Run}}$ button, the model start training. You can monitor the training process in `Process` <br>
+Then click $\text{\color{lightgrey}{Run}}$ button, the model start training. You can monitor the training process in `Process` <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_run.png) <br><br>
 
@@ -61,16 +61,16 @@ and see the training metrics including `coefficient of determination (R2)` and `
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_output.png) <br><br>
 
 #### 3.2. Model Testing
-After model training on given paramters, you can click $\text{\color{pink}{Training}}$ content in **Title** and for model testing <br>
+After model training on given paramters, you can click $\text{\color{hotpink}{Training}}$ content in **Title** and for model testing <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/go_test.png) <br><br>
 
-then ensure the parameters are consistent with **Model Training** and click $\text{\color{grey}{Run}}$ button
+then ensure the parameters are consistent with **Model Training** and click $\text{\color{lightgrey}{Run}}$ button
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_run.png) <br><br>
 
 #### 3.3. Draw Results
-You can go to the `Result` page to show results. Click $\text{\color{blue}{Result}}$ button to show the estimated results and true magnitudes. <br>
+You can go to the `Result` page to show results. Click $\text{\color{lightskyblue}{Result}}$ button to show the estimated results and true magnitudes. <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_result.png) <br><br>
 
@@ -80,11 +80,11 @@ You can go to the `Record` page to view the training and testing records of give
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_record.png) <br><br>
 
 ### 4. Run Custom Codes for Deep Learning
-**EQ-Web-FrontEnd** also provides the function for online editing, uploading, and running Python codes. By selecting `TestNet` as an example, click $\text{\color{grey}{Detail}}$ button 
+**EQ-Web-FrontEnd** also provides the function for online editing, uploading, and running Python codes. By selecting `TestNet` as an example, click $\text{\color{darkgrey}{Detail}}$ button 
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_detail.png) <br><br>
 
-The parts that can be modified through $\text{\color{green}{Edit}}$ and $\text{\color{orange}{Upload}}$ are as follows
+The parts that can be modified through $\text{\color{lightseagreen}{Edit}}$ and $\text{\color{darkorange}{Upload}}$ are as follows
 ```
 Model Name:
 Description:
@@ -98,7 +98,7 @@ Training Code:
 Testing Code:
 Running Code:
 ```
-TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html). You can click $\text{\color{orange}{Run}}$ button and get <br>
+TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html). You can click $\text{\color{lightgrey}{Run}}$ button and get <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_code_data.png) <br>
 
