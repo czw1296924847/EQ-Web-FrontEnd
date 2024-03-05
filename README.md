@@ -107,3 +107,86 @@ TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart
 ## Problems and Solutions
 
 ## Extension
+
+## API Reference
+```
+App.css
+App.js
+App.test.js
+components/
+  Alert.css
+  func.js
+  home/
+    detail/
+      EditModal.js
+      ModelDetailForm.css
+      ModelDetailForm.js
+      ModelDetail.js
+      RunModal.js
+      UploadModal.js
+    dist/
+      FeatureDist.js
+    Home.css
+    Home.js
+    information/
+      Information.css
+      Information.js
+    list/
+      DistModal.js
+      FeatureList.js
+      LocateModal.js
+      ModelList.css
+      ModelList.js
+    locate/
+      SourceLocate.js
+    login/
+      Login.css
+      LoginForm.js
+      Login.js
+      ReLogin.js
+    new/
+      ModelNewForm.js
+      ModelNew.js
+    remove/
+      ModelRemove.js
+    utils.js
+  LanguageContext.js
+  operation/
+    Opt.css
+    Opt.js
+    OptParam.js
+    record/
+      OptRecord.css
+      OptRecordForm.js
+      OptRecord.js
+      OptRecordRemove.js
+    result/
+      CompTruePred.js
+      LossHistory.js
+      OptResult.css
+      OptResult.js
+    test/
+      Test.js
+      TestParam.js
+    train/
+      Train.js
+      TrainParam.js
+    utils.js
+  share/
+    error/
+      NotFound.js
+    Header.css
+    Header.js
+    menu/
+      NavMenu.js
+      SubNavMenu.js
+    MyLayout.css
+    MyLayout.js
+    utils.js
+index.css
+index.js
+logo.svg
+reportWebVitals.js
+setupTests.js
+
+```
