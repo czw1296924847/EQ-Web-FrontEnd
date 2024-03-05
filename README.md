@@ -74,6 +74,27 @@ You can go to the `Result` page to show results. Click $\text{\color{blue}{Resul
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_result.png) <br><br>
 
+### 4. Run Custom Codes for Deep Learning
+**EQ-Web-FrontEnd** also provides the function for online editing, uploading, and running Python codes. By selecting `TestNet` as an example, click $\text{\color{grey}{Detail}}$ button 
+
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_detail.png) <br><br>
+
+The parts that can be modified through $\text{\color{green}{Edit}}$ and $\text{\color{orange}{Upload}}$ are as follows
+```
+Model Name:
+Description:
+Version:
+Owner:
+Data Path:
+Library:
+Data Code:
+Model Code:
+Training Code:
+Testing Code:
+Running Code:
+
+```
+
 #### 3.4. Operation Record
 You can go to the `Record` page to view the training and testing records of given model under different parameters. <br>
 
