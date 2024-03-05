@@ -19,7 +19,7 @@ const OptRecord = () => {
     }, []);
 
     const getRecord = () => {
-        axios.get(ESTIMATE_URL + model_name + "/" + opt).then(response => {
+        axios.get(ESTIMATE_URL + model_name + "/" + opt + "/record").then(response => {
             setInfos(response.data);
         }).catch(error => {
             console.error(error);

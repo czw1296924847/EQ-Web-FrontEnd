@@ -28,7 +28,7 @@ const TrainParam = () => {
         {name: "batch_size", value: "64"},
         {name: "epochs", value: "10"},
         {name: "train_ratio", value: "0.75"},
-        {name: "data_size", value: "200000"},
+        {name: "data_size", value: "1000"},
         {name: "sm_scale", value: "ml"},
         {name: "chunk_name", value: "chunk2"},
     ]);
@@ -48,7 +48,6 @@ const TrainParam = () => {
     const [isHovered, setIsHovered] = useState(false);
     const [optStyle, setOptStyle] = useState("param");
     const [isEnd, setIsEnd] = useState(true);
-    const [isDefaultModel, setIsDefaultModel] = useState(DEFAULT_MODELS.includes(model_name));
 
     let interval = null;
     let epoch = 0;
@@ -146,20 +145,19 @@ const TrainParam = () => {
                       optStyle={optStyle}
                       onClick={trainModel}/>
 
-            {isDefaultModel &&
-                <Fragment>
-                    <Row>
-                        <span className="Opt-Input-Title">{Trans_OptParam(la)['input_param']}</span>
-                    </Row>
+            <Fragment>
+                <Row>
+                    <span className="Opt-Input-Title">{Trans_OptParam(la)['input_param']}</span>
+                </Row>
 
-                    <Row className="Opt-Row" gutter={GUTTER_SIZE}>
-                        <OptInput params={params}
-                                  opt={opt}
-                                  la={la}
-                                  offset={1}
-                                  onChange={handleInputChange}/>
-                    </Row>
-                </Fragment>}
+                <Row className="Opt-Row" gutter={GUTTER_SIZE}>
+                    <OptInput params={params}
+                              opt={opt}
+                              la={la}
+                              offset={1}
+                              onChange={handleInputChange}/>
+                </Row>
+            </Fragment>
 
 
             <Row className="Opt-Row">
@@ -175,18 +173,17 @@ const TrainParam = () => {
                 <OptProcess process={process}
                             la={la}/>
             </Row>
-            {isDefaultModel &&
-                <Fragment>
-                    <Row>
-                        <span className="Opt-Output-Title">{Trans_OptParam(la)['output_param']}</span>
-                    </Row>
-                    <Row className="Opt-Row" gutter={GUTTER_SIZE}>
-                        <OptOutput results={results}
-                                   opt={opt}
-                                   la={la}
-                                   offset={1}/>
-                    </Row>
-                </Fragment>}
+            <Fragment>
+                <Row>
+                    <span className="Opt-Output-Title">{Trans_OptParam(la)['output_param']}</span>
+                </Row>
+                <Row className="Opt-Row" gutter={GUTTER_SIZE}>
+                    <OptOutput results={results}
+                               opt={opt}
+                               la={la}
+                               offset={1}/>
+                </Row>
+            </Fragment>
         </Container>
     );
 };

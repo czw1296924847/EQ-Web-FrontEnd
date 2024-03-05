@@ -6,6 +6,7 @@ import NavMenu from "./menu/NavMenu";
 import SubNavMenu from "./menu/SubNavMenu";
 import "./MyLayout.css";
 import {ESTIMATE_URL} from "../../index";
+import {DEFAULT_MODELS} from "../func";
 
 const {Header, Content, Footer} = Layout;
 
@@ -23,21 +24,22 @@ const MyLayout = ({children}) => {
         localStorage.removeItem('token');
     }
 
-    const [model_names, setModelNames] = useState([]);
-
-    useEffect(() => {
-        const fetchModelNames = () => {
-            axios.get(ESTIMATE_URL + "models").then(response => {
-                const model_names = response.data.map(item => {
-                    return item.name;
-                });
-                setModelNames(model_names);
-            }).catch(error => {
-                console.error(error);
-            });
-        };
-        fetchModelNames();
-    }, [la]);
+    const model_names = DEFAULT_MODELS;
+    // const [model_names, setModelNames] = useState([]);
+    //
+    // useEffect(() => {
+    //     const fetchModelNames = () => {
+    //         axios.get(ESTIMATE_URL + "models").then(response => {
+    //             const model_names = response.data.map(item => {
+    //                 return item.name;
+    //             });
+    //             setModelNames(model_names);
+    //         }).catch(error => {
+    //             console.error(error);
+    //         });
+    //     };
+    //     fetchModelNames();
+    // }, [la]);
 
     const getNavOptUrl = (model_name, style) => {
         let url_new = window.location.href.split('/').slice(3);

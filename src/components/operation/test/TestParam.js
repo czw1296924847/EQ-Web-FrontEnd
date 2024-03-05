@@ -23,7 +23,7 @@ const TestParam = () => {
     const [opt, setOpt] = useState(url[url.length - 1]);
     const [params, setParams] = useState([
         {name: "train_ratio", value: "0.75"},
-        {name: "data_size", value: "100"},
+        {name: "data_size", value: "1000"},
         {name: "sm_scale", value: "ml"},
         {name: "chunk_name", value: "chunk2"},
     ]);
