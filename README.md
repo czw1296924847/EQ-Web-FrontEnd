@@ -74,6 +74,11 @@ You can go to the `Result` page to show results. Click $\text{\color{blue}{Resul
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_result.png) <br><br>
 
+#### 3.4. Operation Record
+You can go to the `Record` page to view the training and testing records of given model under different parameters. <br>
+
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_record.png) <br><br>
+
 ### 4. Run Custom Codes for Deep Learning
 **EQ-Web-FrontEnd** also provides the function for online editing, uploading, and running Python codes. By selecting `TestNet` as an example, click $\text{\color{grey}{Detail}}$ button 
 
@@ -98,8 +103,3 @@ TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_code_data.png) <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_code_run.png) <br>
-
-#### 3.4. Operation Record
-You can go to the `Record` page to view the training and testing records of given model under different parameters. <br>
-
-![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_record.png) <br><br>
