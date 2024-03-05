@@ -22,9 +22,15 @@ npm install @antv/l7 --save
 npm install @antv/l7-maps --save
 ```
 
-## Get Start
+## Program Description
+### 1. Start Service
 After completing all the configurations, you can enter the project and initiate it
 ```
-cd EQ-web
+cd EQ-Web-FrontEnd
 npm run start
 ```
+then go to the web page <br>
+```
+{ip}:{port}/inform/
+```
+where in our example, host = 127.0.0.1 and port = 8080. Then you will see <br>
