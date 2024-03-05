@@ -8,7 +8,7 @@ Its backend framework is [EQ-Web-BackEnd](https://github.com/zw-Ch/EQ-Web-BackEn
 Firstly please confirm you have installed [Node.js](https://nodejs.p2hp.com/) and [npm](https://npm.p2hp.com/), here is an optional tutorial: [https://zhuanlan.zhihu.com/p/47977487](https://zhuanlan.zhihu.com/p/47977487). <br>
 Then you can create a react app for yourself <br>
 ```
-npx create-react-app EQ-Web
+npx create-react-app EQ-Web-FrontEnd
 ```
 There are some packages need to be installed<br>
 ```
