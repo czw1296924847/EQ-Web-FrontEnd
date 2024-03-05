@@ -86,17 +86,17 @@ You can go to the `Record` page to view the training and testing records of give
 
 The parts that can be modified through $\text{\color{lightseagreen}{Edit}}$ and $\text{\color{darkorange}{Upload}}$ are as follows
 ```
-Model Name:
-Description:
-Version:
-Owner:
-Data Path:
-Library:
-Data Code:
-Model Code:
-Training Code:
-Testing Code:
-Running Code:
+Model Name:     the name of deep learning model
+Description:    the description of code
+Version:        the version of code
+Owner:          the author of code
+Data Path:      the path to store dataset
+Library:        the dependent libraries required for 
+Data Code:      the code for processing data
+Model Code:     the code for defining model structure
+Training Code:  the code for training model
+Testing Code:   the code for testing model
+Running Code:   the code for running program
 ```
 TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html). You can click $\text{\color{lightgrey}{Run}}$ button and get <br>
 
