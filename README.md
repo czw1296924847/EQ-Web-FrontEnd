@@ -48,7 +48,7 @@ We provide some deep learning models for magnitude estimation, and the used data
 Select one of `MagInfoNet`, `EQGraphNet`, `MagNet`, `CREIME`, `ConvNetQuakeINGV`, and click the button to perform some operation of Magnitude Estimation Task.
 
 #### 3.1. Model Training
-Click $\text{\color{pink}{Train}}$ button, go to the `Param` page and you can set paramter values <br>
+Click $\text{\color{hotpink}{Train}}$ button, go to the `Param` page and you can set paramter values <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_param.png) <br><br>
 
