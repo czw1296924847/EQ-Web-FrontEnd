@@ -103,3 +103,7 @@ TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_code_data.png) <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_code_run.png) <br>
+
+## Problems and Solutions
+
+## Extension
