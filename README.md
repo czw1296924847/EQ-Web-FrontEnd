@@ -36,3 +36,8 @@ then go to the web page <br>
 where in our example, host = 127.0.0.1 and port = 8080. Then you will see <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/inform.png)<br>
+
+### 1. Change Language
+You can change the language including `English` and `Chinese` by <br>
+
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/change_language.png)<br>
