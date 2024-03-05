@@ -37,7 +37,18 @@ where in our example, host = 127.0.0.1 and port = 8080. Then you will see <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/inform.png)<br>
 
-### 1. Change Language
+### 2. Change Language
 You can change the language including `English` and `Chinese` in **setting** >> **Language** <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/change_language.png)<br>
+
+### 3. Magnitude Estimation
+We provide some deep learning models for magnitude estimation, and the used dataset can be downloaded from [https://github.com/smousavi05/STEAD](https://github.com/smousavi05/STEAD).
+
+#### 3.1. Model Training
+
+#### 3.2. Model Testing
+
+#### 3.3. Draw Results
+
+#### 3.4. Operation Record
