@@ -104,89 +104,90 @@ TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_code_run.png) <br>
 
-## Problems and Solutions
-
-## Extension
-
-## API Reference
+## Project Structure
 ```
 App.css
-App.js
+App.js          # root component, routing management
 App.test.js
 components/
-  Alert.css
-  func.js
-  home/
-    detail/
-      EditModal.js
-      ModelDetailForm.css
-      ModelDetailForm.js
-      ModelDetail.js
-      RunModal.js
-      UploadModal.js
-    dist/
-      FeatureDist.js
-    Home.css
-    Home.js
-    information/
-      Information.css
-      Information.js
-    list/
-      DistModal.js
-      FeatureList.js
-      LocateModal.js
-      ModelList.css
-      ModelList.js
-    locate/
-      SourceLocate.js
-    login/
-      Login.css
-      LoginForm.js
-      Login.js
-      ReLogin.js
-    new/
-      ModelNewForm.js
-      ModelNew.js
-    remove/
-      ModelRemove.js
-    utils.js
-  LanguageContext.js
-  operation/
-    Opt.css
-    Opt.js
-    OptParam.js
-    record/
-      OptRecord.css
-      OptRecordForm.js
-      OptRecord.js
-      OptRecordRemove.js
-    result/
-      CompTruePred.js
-      LossHistory.js
-      OptResult.css
-      OptResult.js
-    test/
-      Test.js
-      TestParam.js
-    train/
-      Train.js
-      TrainParam.js
-    utils.js
-  share/
-    error/
-      NotFound.js
-    Header.css
-    Header.js
-    menu/
-      NavMenu.js
-      SubNavMenu.js
-    MyLayout.css
-    MyLayout.js
-    utils.js
+    Alert.css       # style of Alert Box
+    func.js
+    home/
+        detail/                 # 'Detail' page
+            EditModal.js            # Edit and update content
+            ModelDetailForm.css
+            ModelDetailForm.js
+            ModelDetail.js          # Show detail information of model
+            RunModal.js             # Run Pyton code
+            UploadModal.js          # Upload .py and update content
+        dist/
+            FeatureDist.js
+        Home.css
+        Home.js
+        information/            # 'Information' page
+            Information.css
+            Information.js
+        list/                   # Show Model information and DataSet information
+            DistModal.js            # Draw value distribution
+            FeatureList.js          # Show feature information of STEAD
+            LocateModal.js          # Draw location of source or station
+            ModelList.css
+            ModelList.js
+        locate/
+            SourceLocate.js         # Draw source distribution
+        login/                  # 'Login' page
+            Login.css
+            LoginForm.js            # Login submission form
+            Login.js
+            ReLogin.js              # If not logged in, redirect to 'Login' page
+        new/                    # Create new model
+            ModelNewForm.js
+            ModelNew.js
+        remove/                 # Delete model
+            ModelRemove.js
+        utils.js
+    LanguageContext.js
+    operation/
+        Opt.css
+        Opt.js                  # Common components for operation
+        OptParam.js             # 'Param' page
+        record/                 # 'Record' page
+            OptRecord.css
+            OptRecordForm.js
+            OptRecord.js
+            OptRecordRemove.js
+        result/                 # 'Result' page
+            CompTruePred.js         # Draw estimated results and true magnitudes
+            LossHistory.js          # Draw the loss values during iteration process
+            OptResult.css
+            OptResult.js            # Show results of training or testing
+        test/
+            Test.js
+            TestParam.js            # Model testing
+        train/
+            Train.js
+            TrainParam.js           # Model training
+        utils.js
+    share/
+        error/                  # when the web page does not exist
+            NotFound.js
+        Header.css
+        Header.js
+        menu/
+            NavMenu.js              # Navigation bar menu
+            SubNavMenu.js           # Sidebar menu
+        MyLayout.css
+        MyLayout.js             # Public component, for displaying the menu bar
+        utils.js
 index.css
 index.js
 logo.svg
 reportWebVitals.js
 setupTests.js
-
 ```
+
+## Problems and Solutions
+
+## Extension
+
+## API Reference
