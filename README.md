@@ -34,3 +34,5 @@ then go to the web page <br>
 {ip}:{port}/inform/
 ```
 where in our example, host = 127.0.0.1 and port = 8080. Then you will see <br>
+
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/inform.png)<br>
