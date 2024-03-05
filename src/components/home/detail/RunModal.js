@@ -3,7 +3,7 @@ import {Input, Modal} from 'antd';
 import axios from "axios";
 
 import LanguageContext from "../../LanguageContext";
-import {catContent, clearProcess, Trans_ModelDetail} from "../../func";
+import {catContent, clearProcess, DEFAULT_MODELS, Trans_ModelDetail} from "../../func";
 import {ESTIMATE_URL} from "../../../index";
 import {HomeAlert} from "../Home";
 import "../../Alert.css";
@@ -30,9 +30,10 @@ const RunModal = ({items_upload, resetState, info, selectKey, modal, handleCance
     let content = "";
     let waitTime = 5000;
     let processCalls = 0;
+    const isDefaultModel = DEFAULT_MODELS.includes(info['name']);
 
     useEffect(() => {
-        if (selectKey === 'code_run') {
+        if (selectKey === 'code_run' && isDefaultModel) {
             resetProcess()
         }
     }, [isEnd]);
@@ -125,7 +126,7 @@ const RunModal = ({items_upload, resetState, info, selectKey, modal, handleCance
             setTypeAlert("success");
             setMsg(Trans_ModelDetail(la)['run_success']);
             resetState();
-            if (selectKey !== 'code_run') {
+            if (selectKey !== 'code_run' || !isDefaultModel) {
                 setChangeValue(response.data);
             }
             console.log(response.data)

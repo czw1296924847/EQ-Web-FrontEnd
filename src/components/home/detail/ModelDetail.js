@@ -9,6 +9,7 @@ import LanguageContext from "../../LanguageContext";
 import {Trans_ModelList} from "../utils";
 import {Trans_OptParam} from "../../operation/utils";
 import {UrlButton} from "../../operation/OptParam";
+import {DEFAULT_MODELS} from "../../func";
 
 
 const ModelDetail = () => {
@@ -18,6 +19,7 @@ const ModelDetail = () => {
     const url = window.location.href.split('/').slice(2);
     const model_name = url[url.length - 2];
     const [infos, setInfos] = useState([]);
+    const isDefaultModel = DEFAULT_MODELS.includes(model_name);
 
     useEffect(() => {
         resetState();
@@ -43,12 +45,13 @@ const ModelDetail = () => {
         navigate(`/inform`);
     }
 
-    const size = 150;
+    const size = 140;
+    const paddingRight = isDefaultModel ? size : 10;
 
     return (
         <Container>
             <Row>
-                <div className="ModelDetail-Title" style={{paddingRight: `${size + 15}px`}}>
+                <div className="ModelDetail-Title" style={{paddingRight: `${paddingRight}px`}}>
                     <h1 style={{textAlign: 'center', flex: 1}}>
                         <span className="ModelDetail-H1-Model">{model_name} </span>
                         <Tooltip placement={"top"} title={Trans_OptParam(la)['go_info_page']}>
@@ -56,8 +59,8 @@ const ModelDetail = () => {
                                   onClick={() => getInfoUrl()}>{Trans_ModelList(la)['detail_info']}</span>
                         </Tooltip>
                     </h1>
-                    {UrlButton(getModelUrl, la, model_name, "test", "ModelDetail-Test-Button", {marginLeft: `-${size}px`})}
-                    {UrlButton(getModelUrl, la, model_name, "train", "ModelDetail-Train-Button", {marginLeft: `-${size}px`})}
+                    {isDefaultModel && UrlButton(getModelUrl, la, model_name, "test", "ModelDetail-Test-Button", {marginLeft: `-${size}px`})}
+                    {isDefaultModel && UrlButton(getModelUrl, la, model_name, "train", "ModelDetail-Train-Button", {marginLeft: `-${size}px`})}
                 </div>
                 <Col>
                     <ModelDetailForm infos={infos} resetState={resetState}/>

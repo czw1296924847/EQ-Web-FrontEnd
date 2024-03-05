@@ -19,6 +19,10 @@ const ModelList = ({models, resetState}) => {
 
     const color_th = "dimgray";
 
+    const margin_left = (model_name) => {
+        return DEFAULT_MODELS.includes(model_name) ? 0 : 160.5;
+    }
+
     const onCloseAlert = (e) => {
         setShowAlert(false);
         setMsg("");
@@ -86,13 +90,17 @@ const ModelList = ({models, resetState}) => {
                                 <td>{model.name}</td>
                                 <td>{model.description}</td>
                                 <td>{model.owner}</td>
-                                <td>
-                                    {UrlButton(getModelUrl, la, model.name, "train", "ModelList-Button-Train", {})}
-                                    &nbsp;&nbsp;
-                                    {UrlButton(getModelUrl, la, model.name, "test", "ModelList-Button-Test", {})}
-                                    &nbsp;&nbsp;
-                                    {UrlButton(getModelUrl, la, model.name, "detail", "ModelList-Button-Detail", {})}
-                                    &nbsp;&nbsp;
+                                <td className='ModelList-Opt'>
+                                    {DEFAULT_MODELS.includes(model.name) && (
+                                        <>
+                                            {UrlButton(getModelUrl, la, model.name, "train", "ModelList-Button-Train", {})}
+                                            {' '}
+                                            {UrlButton(getModelUrl, la, model.name, "test", "ModelList-Button-Test", {})}
+                                            {' '}
+                                        </>
+                                    )}
+                                    {UrlButton(getModelUrl, la, model.name, "detail", "ModelList-Button-Detail", {marginLeft: `${margin_left(model.name)}px`})}
+                                    {' '}
                                     <ModelRemove pk={model.pk} resetState={resetState}/>
                                 </td>
                             </tr>

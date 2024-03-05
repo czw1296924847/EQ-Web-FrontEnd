@@ -1,15 +1,15 @@
 .ModelList-Button-Train {
-    width: 70px;
+    width: 75px;
     background-color: hotpink;
 }
 
 .ModelList-Button-Test {
-    width: 70px;
+    width: 75px;
     background-color: cornflowerblue;
 }
 
 .ModelList-Button-Detail {
-    width: 70px;
+    width: 75px;
     background-color: darkgrey;
 }
 
@@ -58,4 +58,8 @@
 
 .ModelList-Modal-Delete {
     width: 600px;
+}
+
+.ModelList-Opt {
+    width: 335px;
 }

@@ -12,10 +12,14 @@ import LanguageContext from "../../LanguageContext";
 
 const Login = () => {
     const {la, _} = useContext(LanguageContext);
-
-    localStorage.setItem('token', "0");
     const navigate = useNavigate()
     const {state} = useLocation()
+
+    localStorage.setItem('token', "0");
+    const EXPIRE_TIME = 60 * 60 * 1000;
+    setTimeout(() => {
+        localStorage.setItem('token', "0");
+    }, EXPIRE_TIME);
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
