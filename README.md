@@ -43,7 +43,9 @@ You can change the language including `English` and `Chinese` in **setting** >> 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/change_language.png)<br>
 
 ### 3. Magnitude Estimation
-We provide some deep learning models for magnitude estimation, and the used dataset can be downloaded from [https://github.com/smousavi05/STEAD](https://github.com/smousavi05/STEAD).
+We provide some deep learning models for magnitude estimation, and the used dataset can be downloaded from [https://github.com/smousavi05/STEAD](https://github.com/smousavi05/STEAD). <br>
+
+Select one of `MagInfoNet`, `EQGraphNet`, `MagNet`, `CREIME`, `ConvNetQuakeINGV`, and click the button to perform some operation of Magnitude Estimation Task.
 
 #### 3.1. Model Training
 
