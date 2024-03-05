@@ -92,8 +92,12 @@ Model Code:
 Training Code:
 Testing Code:
 Running Code:
-
 ```
+TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html). You can click $\text{\color{orange}{Run}}$ button and get <br>
+
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_code_data.png) <br>
+
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_code_run.png) <br>
 
 #### 3.4. Operation Record
 You can go to the `Record` page to view the training and testing records of given model under different parameters. <br>
