@@ -12,7 +12,7 @@
     position: relative;
     top: 25%;
     left: 50%;
-    transform: translate(-50%, -1020%);
+    transform: translate(-50%, -1250%);
     width: 600px;
     height: 50px;
     font-size: 22px;
@@ -34,4 +34,44 @@
     left: 7%;
     transform: translate(-50%, -50%);
     font-size: 21px;
+}
+
+.ModelList-Alert-Create {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 50px;
+    font-size: 22px;
+}
+
+.ModelList-Alert-Delete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 50px;
+    font-size: 22px;
+}
+
+.ModelList-Alert-Complete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 50px;
+    font-size: 22px;
+}
+
+.ModelDetail-Wait-Alert {
+    position: fixed;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 50px;
+    font-size: 22px;
 }
