@@ -3,11 +3,9 @@ import {Input, Modal} from 'antd';
 import axios from "axios";
 
 import LanguageContext from "../../LanguageContext";
-import {catContent, clearProcess, DEFAULT_MODELS, Trans_ModelDetail} from "../../func";
+import {SimpleAlert, catContent, clearProcess, DEFAULT_MODELS, Trans_ModelDetail, onCloseAlert} from "../../func";
 import {ESTIMATE_URL} from "../../../index";
-import {HomeAlert} from "../Home";
 import "../../Alert.css";
-import {Trans_OptParam} from "../../operation/utils";
 
 const {TextArea} = Input;
 
@@ -103,14 +101,6 @@ const RunModal = ({items_upload, resetState, info, selectKey, modal, handleCance
             }).join('          ');
     }
 
-    const onCloseAlert = (e) => {
-        setShowAlert(false);
-        setTypeAlert("success");
-        setMsg("");
-        console.log(e, "Close Alert.")
-    };
-
-
     const runModal = async () => {
         setIsEnd(false);        // Start monitoring the train process
         await clearProcess(info['name']);
@@ -149,7 +139,7 @@ const RunModal = ({items_upload, resetState, info, selectKey, modal, handleCance
                 <TextArea value={changeValue}
                           autoSize={{minRows: 3, maxRows: 18}}/>
 
-                {showAlert && HomeAlert("ModelDetail-Wait-Alert", msg, typeAlert, onCloseAlert)}
+                {showAlert && SimpleAlert("ModelDetail-Wait-Alert", msg, typeAlert, (e) => onCloseAlert(e, setShowAlert, setMsg))}
             </Modal>
         </Fragment>
     );

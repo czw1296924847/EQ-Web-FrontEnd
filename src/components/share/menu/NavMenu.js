@@ -1,21 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Menu} from 'antd';
 import {
     HomeOutlined, LogoutOutlined, ProfileOutlined, AppstoreOutlined,
     SettingOutlined, UpCircleOutlined, DownCircleOutlined,
-    PartitionOutlined, FontColorsOutlined,
+    PartitionOutlined, FontColorsOutlined, DesktopOutlined,
 } from '@ant-design/icons';
 import {INFOS, OPTS, OPTSTYLES} from "../../operation/utils";
 import "../MyLayout.css";
 import {Trans_NavMenu} from "../utils";
+import EnvModal from "./EnvModal";
+import {handleModalCancel} from "../../func";
 
-const NavMenu = ({model_names, getNavOptUrl, logout, setLa, la}) => {
+const NavMenu = ({model_names, env_names, logout, setLa, la, setEnv, env}) => {
     const navigate = useNavigate();
     const url = window.location.href.split('/').slice(2);
     const [opt, setOpt] = useState("");
     const [style, setStyle] = useState("");
     const [forceRefresh, setForceRefresh] = useState(false);
+    const [envModal, setEnvModal] = useState(false);
 
     const NavMenu_Icon_Size = 25;
     const NavMenu_Element_Icon_Size = 22;
@@ -29,7 +32,7 @@ const NavMenu = ({model_names, getNavOptUrl, logout, setLa, la}) => {
         const {opt, style} = getOptStyle();
         setOpt(opt);
         setStyle(style);
-    }, [la, forceRefresh]);
+    }, [la, envModal, forceRefresh]);
 
     const getOptStyle = () => {
         let opt = "";
@@ -46,12 +49,11 @@ const NavMenu = ({model_names, getNavOptUrl, logout, setLa, la}) => {
             throw new Error("Invalid 'style' or 'opt'!");
         }
         return {opt, style};
-    }
+    };
 
     const getOverViewUrl = () => {
-        const a = 1;
         navigate(`/home`);
-    }
+    };
 
     const getModelUrl = (model) => {
         if (OPTS.includes(opt) && OPTSTYLES.includes(style)) {     // OptResult, OptRecord, OptFactor
@@ -67,7 +69,7 @@ const NavMenu = ({model_names, getNavOptUrl, logout, setLa, la}) => {
             navigate(`/`)
         }
         setForceRefresh(true);
-    }
+    };
 
     const getOptUrl = (toOpt) => {
         if (url.length === 3 && model_names.includes(url[1]) && OPTS.includes(opt)) {   // OptParam
@@ -80,12 +82,19 @@ const NavMenu = ({model_names, getNavOptUrl, logout, setLa, la}) => {
             navigate(`/${toOpt}`)
         }
         setForceRefresh(true);
-    }
+    };
 
     const changeLa = (la) => {
         setLa(la);
         localStorage.setItem('la', la);
-    }
+    };
+
+    const changeEnv = (env) => {
+        setEnvModal(true);
+        setEnv(env);
+        localStorage.setItem('env', env);
+    };
+
 
     const NavMenu = [
         {
@@ -107,11 +116,6 @@ const NavMenu = ({model_names, getNavOptUrl, logout, setLa, la}) => {
                               href={"/inform"}>{Trans_NavMenu(la)['information']}</a>,
                     key: 'information',
                     icon: <ProfileOutlined style={{fontSize: `${NavMenu_Element_Icon_Size}px`}}/>,
-                    // children: model_names && model_names.length > 0 ? model_names.map(model => ({
-                    //     label: <a href={`/${model}/detail`}
-                    //               className="MyLayout-NavMenuElement-Label">{model}</a>,
-                    //     key: `${model}-information`,
-                    // })) : null,
                 }
             ],
         },
@@ -135,22 +139,12 @@ const NavMenu = ({model_names, getNavOptUrl, logout, setLa, la}) => {
                                  onClick={() => getOptUrl("train")}>{Trans_NavMenu(la)['train']}</span>,
                     key: 'train',
                     icon: <UpCircleOutlined style={{fontSize: `${NavMenu_Element_Icon_Size}px`}}/>,
-                    // children: model_names && model_names.length > 0 ? model_names.map(model => ({
-                    //     label: <a href={`/${getNavOptUrl(model, "train")}`}
-                    //               className="MyLayout-NavMenuElement-Label">{model}</a>,
-                    //     key: `${model}-train`,
-                    // })) : null,
                 },
                 {
                     label: <span className="MyLayout-NavMenuElement-Label"
                                  onClick={() => getOptUrl("test")}>{Trans_NavMenu(la)['test']}</span>,
                     key: 'test',
                     icon: <DownCircleOutlined style={{fontSize: `${NavMenu_Element_Icon_Size}px`}}/>,
-                    // children: model_names && model_names.length > 0 ? model_names.map(model => ({
-                    //     label: <a href={`/${getNavOptUrl(model, "test")}`}
-                    //               className="MyLayout-NavMenuElement-Label">{model}</a>,
-                    //     key: `${model}-test`,
-                    // })) : null,
                 },
             ],
         },
@@ -178,7 +172,17 @@ const NavMenu = ({model_names, getNavOptUrl, logout, setLa, la}) => {
                     ],
                 },
                 {
-                    label: <a className="MyLayout-NavMenu-label-logout"
+                    label: <span className="MyLayout-NavMenu-Label-Env">{Trans_NavMenu(la)['env']}</span>,
+                    key: 'env',
+                    icon: <DesktopOutlined style={{fontSize: `${NavMenu_Element_Icon_Size}px`}}/>,
+                    children: env_names && env_names.length > 0 ? env_names.map(env_name => ({
+                        label: <span onClick={() => changeEnv(env_name)}
+                                     className="MyLayout-NavMenuElement-Label">{env_name}</span>,
+                        key: env_name,
+                    })) : null,
+                },
+                {
+                    label: <a className="MyLayout-NavMenu-Label-Logout"
                               href={"/login"}
                               onClick={logout}>{Trans_NavMenu(la)['logout']}</a>,
                     key: 'logout',
@@ -189,13 +193,17 @@ const NavMenu = ({model_names, getNavOptUrl, logout, setLa, la}) => {
     ];
 
     return (
-        <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-            items={NavMenu}
-            style={{marginLeft: "-2%"}}
-        />
+        <Fragment>
+            <Menu
+                theme="dark"
+                mode="horizontal"
+                defaultSelectedKeys={['2']}
+                items={NavMenu}
+                style={{marginLeft: "-2%"}}
+            />
+            {envModal && <EnvModal envModal={envModal}
+                                   handleCancel={() => handleModalCancel(setEnvModal)}/>}
+        </Fragment>
     );
 }
 

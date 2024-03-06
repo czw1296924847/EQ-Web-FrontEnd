@@ -1,13 +1,13 @@
 import React, {Fragment, useState, useContext} from "react";
 import {Modal, ModalHeader, ModalFooter} from "reactstrap";
-import {Button, Alert} from "antd";
+import {Button} from "antd";
 
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import "../list/ModelList.css";
 import {Trans_ModelList} from "../utils";
 import LanguageContext from "../../LanguageContext";
-import {HomeAlert} from "../Home";
+import {onCloseAlert, SimpleAlert} from "../../func";
 
 const ModelRemove = ({pk, resetState}) => {
     const {la, _} = useContext(LanguageContext);
@@ -18,12 +18,6 @@ const ModelRemove = ({pk, resetState}) => {
 
     const toggle = () => {
         setModal(!modal);
-    };
-
-    const onCloseAlert = (e) => {
-        setShowAlert(false);
-        setMsg("");
-        console.log(e, "Close Alert.")
     };
 
     const deleteModel = (pk) => {
@@ -72,7 +66,7 @@ const ModelRemove = ({pk, resetState}) => {
                     </Button>
                 </ModalFooter>
             </Modal>
-            {showAlert && HomeAlert("ModelList-Alert-Delete", msg, "error", onCloseAlert)}
+            {showAlert && SimpleAlert("ModelList-Alert-Delete", msg, "error", (e) => onCloseAlert(e, setShowAlert, setMsg))}
 
         </Fragment>
     );

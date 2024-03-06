@@ -7,9 +7,8 @@ import LanguageContext from "../../LanguageContext";
 import {Trans_ModelList} from "../utils";
 import {UrlButton} from "../../operation/OptParam";
 import ModelRemove from "../remove/ModelRemove";
-import {DEFAULT_MODELS, DEFAULT_OPTS} from "../../func";
+import {SimpleAlert, DEFAULT_MODELS, DEFAULT_OPTS, onCloseAlert} from "../../func";
 import {ESTIMATE_URL} from "../../../index";
-import {HomeAlert} from "../Home";
 
 const ModelList = ({models, resetState}) => {
     const {la, _} = useContext(LanguageContext);
@@ -22,12 +21,6 @@ const ModelList = ({models, resetState}) => {
     const margin_left = (model_name) => {
         return DEFAULT_MODELS.includes(model_name) ? 0 : 160.5;
     }
-
-    const onCloseAlert = (e) => {
-        setShowAlert(false);
-        setMsg("");
-        console.log(e, "Close Alert.")
-    };
 
     const getModelUrl = (model_name, toPath) => {
         if (DEFAULT_OPTS.includes(toPath)) {
@@ -109,7 +102,7 @@ const ModelList = ({models, resetState}) => {
                 )}
                 </tbody>
             </Table>
-            {showAlert && HomeAlert("ModelList-Alert-Complete", msg, "error", onCloseAlert)}
+            {showAlert && SimpleAlert("ModelList-Alert-Complete", msg, "error", (e) => onCloseAlert(e, setShowAlert, setMsg))}
         </div>
     );
 }

@@ -88,12 +88,12 @@ const Train = () => {
                 ],
             },
             panning: true,
-            mousewheel: true
+            mousewheel: false,
         });
 
         graph.fromJSON(data);
         graph.centerContent();
-    }, []);
+    }, [la]);
 
     return (
         <div id="train-container" className="Train-Container">

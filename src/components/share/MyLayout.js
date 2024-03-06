@@ -1,17 +1,19 @@
 import React, {useState, useEffect, useContext} from 'react';
-import LanguageContext from "../LanguageContext";
 import {Breadcrumb, Layout, Menu, theme} from 'antd';
 import axios from "axios";
 import NavMenu from "./menu/NavMenu";
 import SubNavMenu from "./menu/SubNavMenu";
 import "./MyLayout.css";
 import {ESTIMATE_URL} from "../../index";
-import {DEFAULT_MODELS} from "../func";
+import {DEFAULT_MODELS, getEnvNames} from "../func";
+import LanguageContext from "../LanguageContext";
+import EnvContext from "../EnvContext";
 
 const {Header, Content, Footer} = Layout;
 
 const MyLayout = ({children}) => {
     const {la, setLa} = useContext(LanguageContext);
+    const {env, setEnv} = useContext(EnvContext);
 
     const url = window.location.href.split('/').slice(2);
     const {token: {colorBgContainer, borderRadiusLG},} = theme.useToken();
@@ -28,7 +30,7 @@ const MyLayout = ({children}) => {
     // const [model_names, setModelNames] = useState([]);
     //
     // useEffect(() => {
-    //     const fetchModelNames = () => {
+    //     const getModelNames = () => {
     //         axios.get(ESTIMATE_URL + "models").then(response => {
     //             const model_names = response.data.map(item => {
     //                 return item.name;
@@ -38,15 +40,13 @@ const MyLayout = ({children}) => {
     //             console.error(error);
     //         });
     //     };
-    //     fetchModelNames();
+    //     getModelNames();
     // }, [la]);
 
-    const getNavOptUrl = (model_name, style) => {
-        let url_new = window.location.href.split('/').slice(3);
-        url_new[0] = model_name;
-        url_new[1] = style;
-        return url_new.join('/');
-    }
+    const [env_names, setEnvNames] = useState([]);
+    useEffect(() => {
+        getEnvNames(setEnvNames);
+    }, []);
 
     const getSubNavUrl = () => {
         return `${url[1]}/${url[2]}`;
@@ -72,10 +72,12 @@ const MyLayout = ({children}) => {
             <Layout>
                 <Header>
                     <NavMenu model_names={model_names}
-                             getNavOptUrl={getNavOptUrl}
+                             env_names={env_names}
                              logout={logout}
                              setLa={setLa}
-                             la={la}/>
+                             la={la}
+                             setEnv={setEnv}
+                             env={env}/>
                 </Header>
 
                 <Layout>

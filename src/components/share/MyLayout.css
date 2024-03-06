@@ -41,11 +41,16 @@
     text-decoration: none;
 }
 
-.MyLayout-NavMenu-label-logout {
+.MyLayout-NavMenu-Label-Logout {
     font-size: 21px;
     /*margin-left: 10%;*/
     text-decoration: none;
     /*color: palegreen;*/
+}
+
+.MyLayout-NavMenu-Label-Env {
+    font-size: 21px;
+    text-decoration: none;
 }
 
 .MyLayout-SubNavMenu-label {

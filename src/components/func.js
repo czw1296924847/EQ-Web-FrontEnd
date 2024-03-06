@@ -1,8 +1,24 @@
 import {ESTIMATE_URL} from "../index";
 import axios from "axios";
+import {Alert} from "antd";
+
+export function SimpleAlert(className, message, type, onClose) {
+    return (
+        <Alert className={className}
+               message={message}
+               closable
+               type={type}
+               showIcon
+               onClose={onClose}/>
+    );
+}
 
 export function getStoredLanguage() {
     return localStorage.getItem('la');
+}
+
+export function getStoredEnv() {
+    return localStorage.getItem('env');
 }
 
 export function arrayEqual(arr1, arr2) {
@@ -12,6 +28,16 @@ export function arrayEqual(arr1, arr2) {
     }
     return true;
 }
+
+export const handleModalCancel = (setModal) => {
+    setModal(false);
+}
+
+export const onCloseAlert = (e, setShowAlert, setMsg) => {
+    setShowAlert(false);
+    setMsg("");
+    console.log(e, "Close Alert.")
+};
 
 export const DEFAULT_MODELS = ['MagInfoNet', 'EQGraphNet', 'MagNet', 'CREIME', 'ConvNetQuakeINGV'];
 export const DEFAULT_OPTS = ['train', 'test'];
@@ -125,9 +151,23 @@ const Trans_Home_En = {
     'train_set': 'Training set',
     'test_set': 'Testing set',
     'train_start': 'Start Training model, epoch = 1',
-    'test_start': 'Start Testing model, epoch = 1',
+    'train_end': 'End Training',
+    'test_start': 'Start Testing model',
+    'test_end': 'End Testing',
     'data_label': 'Get data and label',
-    'is_end': '',
+    'in': 'Input data',
+    'forward': 'Forward propagation',
+    'out': 'Output result',
+    'is_end': 'epoch > epochs ?',
+    'yes': 'Yes',
+    'save': 'Save model weights',
+    'no': 'No',
+    'func': 'Select loss function',
+    'base': 'Based on result and label',
+    'loss': 'Calculate loss (error)',
+    'backward': 'Based on BP algorithm',
+    'update': 'Update model weights',
+    'add_epoch': ' epoch += 1 ',
     'end': 'End',
 }
 
@@ -141,8 +181,9 @@ const Trans_Home_Zh = {
     'train_set': '训练集',
     'test_set': '测试集',
     'train_start': '开始训练，epoch = 1',
-    'train_end': '结束训练，epoch = 1',
+    'train_end': '结束训练',
     'test_start': '开始测试模型',
+    'test_end': '结束测试',
     'data_label': '获取 data 与 label',
     'in': '输入 data',
     'forward': '模型前向传播',
@@ -152,7 +193,7 @@ const Trans_Home_Zh = {
     'save': '保存模型权重',
     'no': '否',
     'func': '选择损失函数',
-    'base': '基于 result 与 label 计算误差',
+    'base': '基于 result 与 label',
     'loss': '计算损失（误差）',
     'backward': '基于反向传播算法',
     'update': '更新模型权重',
@@ -193,3 +234,15 @@ export const clearProcess = async (model_name) => {
             });
     });
 }
+
+
+export const getEnvNames = (setEnvNames) => {
+    axios.get(ESTIMATE_URL + "conda").then(response => {
+        const envs_name = response.data.map(item => {
+            return item['env'];
+        })
+        setEnvNames(envs_name);
+    }).catch(error => {
+        console.error(error);
+    })
+};

@@ -6,7 +6,7 @@ import {solarizedlight} from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import LanguageContext from '../../LanguageContext';
 import './ModelDetailForm.css';
-import {Trans_ModelDetail} from '../../func';
+import {Trans_ModelDetail, handleModalCancel} from '../../func';
 import EditModal from './EditModal';
 import UploadModal from './UploadModal';
 import RunModal from "./RunModal";
@@ -19,10 +19,6 @@ const ModelDetailForm = ({infos, resetState}) => {
     const [runModal, setRunModal] = useState(false);
     const [selectKey, setSelectKey] = useState('');
     const [info, setInfo] = useState(null);
-
-    const handleCancel = (setModal) => {
-        setModal(false);
-    }
 
     const showModal = (key, info, setModal) => {
         setModal(true);
@@ -105,20 +101,20 @@ const ModelDetailForm = ({infos, resetState}) => {
                                      info={info}
                                      selectKey={selectKey}
                                      modal={editModal}
-                                     handleCancel={() => handleCancel(setEditModal)}/>}
+                                     handleCancel={() => handleModalCancel(setEditModal)}/>}
 
             {uploadModal && <UploadModal resetState={resetState}
                                          info={info}
                                          selectKey={selectKey}
                                          modal={uploadModal}
-                                         handleCancel={() => handleCancel(setUploadModal)}/>}
+                                         handleCancel={() => handleModalCancel(setUploadModal)}/>}
 
             {runModal && <RunModal items_upload={items_upload}
                                    resetState={resetState}
                                    info={info}
                                    selectKey={selectKey}
                                    modal={runModal}
-                                   handleCancel={() => handleCancel(setRunModal)}/>}
+                                   handleCancel={() => handleModalCancel(setRunModal)}/>}
         </Fragment>
     );
 }
