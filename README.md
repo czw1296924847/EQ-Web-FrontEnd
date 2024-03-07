@@ -47,7 +47,12 @@ We provide some deep learning models for magnitude estimation, and the used data
 
 Select one of `MagInfoNet`, `EQGraphNet`, `MagNet`, `CREIME`, `ConvNetQuakeINGV`, and click the button to perform some operation of Magnitude Estimation Task.
 
-#### 3.1. Model Training
+#### 3.1. Python Environment
+You can show the libraries of current Python Environment in **setting** >> **Environment** >> **{your_env_name}** <br>
+
+![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/python_env.png)<br><br>
+
+#### 3.2. Model Training
 Click $\text{\color{hotpink}{Train}}$ button, go to the `Param` page and you can set paramter values <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_param.png) <br><br>
@@ -60,7 +65,7 @@ and see the training metrics including `coefficient of determination (R2)` and `
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/train_output.png) <br><br>
 
-#### 3.2. Model Testing
+#### 3.3. Model Testing
 After model training on given paramters, you can click $\text{\color{hotpink}{Training}}$ content in **Title** and for model testing <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/go_test.png) <br><br>
@@ -69,12 +74,12 @@ then ensure the parameters are consistent with **Model Training** and click $\te
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_run.png) <br><br>
 
-#### 3.3. Draw Results
+#### 3.4. Draw Results
 You can go to the `Result` page to show results. Click $\text{\color{lightskyblue}{Result}}$ button to show the estimated results and true magnitudes. <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_result.png) <br><br>
 
-#### 3.4. Operation Record
+#### 3.5. Operation Record
 You can go to the `Record` page to view the training and testing records of given model under different parameters. <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/test_record.png) <br><br>
