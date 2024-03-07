@@ -1,17 +1,16 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom'
 import axios from 'axios';
 import {ESTIMATE_URL} from "../../../index";
 import LoginForm from "./LoginForm";
 import {Alert} from 'antd';
-import {Trans_Login_Msg} from "../../func";
+import {getStoredLanguage, Trans_Login_Msg} from "../../func";
 import "../../Alert.css";
 import "./Login.css";
-import LanguageContext from "../../LanguageContext";
 
 
 const Login = () => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const navigate = useNavigate()
     const {state} = useLocation()
 
@@ -24,10 +23,9 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [msg, setMsg] = useState("");
-    const [type, setType] = useState("login");
     const [showAlert, setShowAlert] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
-    const [returnURL, setReturnURL] = useState(state?.returnURL || '/inform');
+    const returnURL = state?.returnURL || '/inform';
 
     useEffect(() => {
         const handleClickOutside = () => {

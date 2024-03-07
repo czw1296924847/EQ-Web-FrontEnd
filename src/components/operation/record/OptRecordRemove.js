@@ -1,19 +1,19 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import {Modal, ModalHeader, Button, ModalFooter} from "reactstrap";
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import "./OptRecord.css";
-import LanguageContext from "../../LanguageContext";
-import {Trans_OptRecordForm} from "../utils";
+import {Trans_OptRecordForm} from "../func";
+import {getStoredLanguage} from "../../func";
 
 
 const OptRecordRemove = ({train_ratio, data_size, sm_scale, chunk_name, resetState}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
 
     const url = window.location.href.split('/').slice(2);
     const [modal, setModal] = useState(false);
-    const [model_name, setModelName] = useState(url[url.length - 3]);
-    const [opt, setOpt] = useState(url[url.length - 2]);
+    const model_name = url[url.length - 3]
+    const opt = url[url.length - 2]
 
     const toggle = () => {
         setModal(!modal);

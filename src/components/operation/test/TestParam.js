@@ -1,47 +1,35 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useEffect, useState} from "react";
 import {
-    OptInput, OptOutput, OptProcess, OptTitle, OptAlert, GUTTER_SIZE,
-} from "../OptParam";
+    OptInput, OptOutput, OptProcess, OptTitle, OptAlert,
+} from "../module";
 import {Container} from "reactstrap";
-import LanguageContext from "../../LanguageContext";
 import {Row} from 'antd';
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import {
     getStateValue, Trans_OptParam, checkRecord,
     catStr, getParams, resetResults,
-} from "../utils";
+    GUTTER_SIZE, PARAMS_TEST, RESULTS_TRAIN_TEST,
+} from "../func";
 import "../Opt.css";
 import "../../Alert.css";
+import {getStoredLanguage} from "../../func";
 
 
 const TestParam = () => {
-    const {la, _} = useContext(LanguageContext);
-
+    const la = getStoredLanguage();
     const url = window.location.href.split('/').slice(2);
-    const [model_name, setModelName] = useState(url[url.length - 2]);
-    const [opt, setOpt] = useState(url[url.length - 1]);
-    const [params, setParams] = useState([
-        {name: "train_ratio", value: "0.75"},
-        {name: "data_size", value: "1000"},
-        {name: "sm_scale", value: "ml"},
-        {name: "chunk_name", value: "chunk2"},
-    ]);
-    const [results, setResults] = useState([
-        {name: "r2", value: ""},
-        {name: "rmse", value: ""},
-        {name: "e_mean", value: ""},
-        {name: "e_std", value: ""},
-        {name: "pred", value: ""},
-        {name: "true", value: ""},
-    ]);
+    const model_name = url[url.length - 2]
+    const opt = url[url.length - 1]
+    const optStyle = "param";
+
+    const [params, setParams] = useState(PARAMS_TEST);
+    const [results, setResults] = useState(RESULTS_TRAIN_TEST);
     const [msg, setMsg] = useState("");
     const [status, setStatus] = useState("");
     const [typeAlert, setTypeAlert] = useState("");
     const [process, setProcess] = useState("");
     const [showAlert, setShowAlert] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
-    const [optStyle, setOptStyle] = useState("param");
 
     useEffect(() => {
         resetProcess();

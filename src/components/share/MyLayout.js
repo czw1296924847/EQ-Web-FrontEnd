@@ -1,10 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Breadcrumb, Layout, Menu, theme} from 'antd';
-import axios from "axios";
+import {Breadcrumb, Layout, theme} from 'antd';
 import NavMenu from "./menu/NavMenu";
 import SubNavMenu from "./menu/SubNavMenu";
 import "./MyLayout.css";
-import {ESTIMATE_URL} from "../../index";
 import {DEFAULT_MODELS, getEnvNames} from "../func";
 import LanguageContext from "../LanguageContext";
 import EnvContext from "../EnvContext";
@@ -76,8 +74,7 @@ const MyLayout = ({children}) => {
                              logout={logout}
                              setLa={setLa}
                              la={la}
-                             setEnv={setEnv}
-                             env={env}/>
+                             setEnv={setEnv}/>
                 </Header>
 
                 <Layout>

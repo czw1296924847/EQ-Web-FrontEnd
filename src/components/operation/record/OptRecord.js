@@ -4,15 +4,16 @@ import {Row} from 'antd';
 import {ESTIMATE_URL} from "../../../index";
 import axios from "axios";
 import OptRecordForm from "./OptRecordForm";
-import {OptTitle} from "../OptParam";
+import {OptTitle} from "../module";
 
 
 const OptRecord = () => {
     const url = window.location.href.split('/').slice(2);
-    const [model_name, setModelName] = useState(url[url.length - 3]);
-    const [opt, setOpt] = useState(url[url.length - 2]);
+    const model_name = url[url.length - 3];
+    const opt = url[url.length - 2];
+    const optStyle = "record";
+
     const [infos, setInfos] = useState([]);
-    const [optStyle, setOptStyle] = useState("record");
 
     useEffect(() => {
         resetState();

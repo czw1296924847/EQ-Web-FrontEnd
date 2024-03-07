@@ -1,16 +1,15 @@
-import {Fragment, useContext, useState} from "react";
+import {Fragment, useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import {Button, Modal, Input} from 'antd';
 import axios from "axios";
 
-import {Trans_ModelDetail} from "../../func";
-import LanguageContext from "../../LanguageContext";
+import {getStoredLanguage, Trans_ModelDetail} from "../../func";
 import {ESTIMATE_URL} from "../../../index";
 
 const {TextArea} = Input;
 
 const EditModal = ({items_edit, items_upload, resetState, info, selectKey, modal, handleCancel}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const navigate = useNavigate();
     const [changeValue, setChangeValue] = useState(info[selectKey]);
 

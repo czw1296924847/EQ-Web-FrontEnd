@@ -1,18 +1,18 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, {useContext, useState} from "react";
 import {Table} from "reactstrap";
 import {Alert, Button} from 'antd';
 import axios from "axios";
 import "./ModelList.css";
-import LanguageContext from "../../LanguageContext";
-import {Trans_FeatureList} from "../utils";
+import {Trans_FeatureList} from "../func";
 import {ESTIMATE_URL} from "../../../index";
 import "../../Alert.css";
 import DistModal from "./DistModal";
 import LocateModal from "./LocateModal";
+import {getStoredLanguage} from "../../func";
 
 
 const FeatureList = ({features, resetState}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const color_th = "dimgray";
 
     const bins = 40;
@@ -26,10 +26,10 @@ const FeatureList = ({features, resetState}) => {
     const [showAlert, setShowAlert] = useState(true);
     const [showWho, setShowWho] = useState("");
 
-    const [loMin, setLoMin] = useState(-180);
-    const [loMax, setLoMax] = useState(180);
-    const [laMin, setLaMin] = useState(-80);
-    const [laMax, setLaMax] = useState(80);
+    const loMin = -180;
+    const loMax = 180;
+    const laMin = -80
+    const laMax = 80;
 
     const handleShowDist = (feature) => {
         setFeature(feature);

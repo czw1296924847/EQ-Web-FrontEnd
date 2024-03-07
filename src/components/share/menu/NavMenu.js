@@ -6,13 +6,12 @@ import {
     SettingOutlined, UpCircleOutlined, DownCircleOutlined,
     PartitionOutlined, FontColorsOutlined, DesktopOutlined,
 } from '@ant-design/icons';
-import {INFOS, OPTS, OPTSTYLES} from "../../operation/utils";
 import "../MyLayout.css";
-import {Trans_NavMenu} from "../utils";
+import {Trans_NavMenu} from "../func";
 import EnvModal from "./EnvModal";
-import {handleModalCancel} from "../../func";
+import {handleModalCancel, DEFAULT_OPTS, DEFAULT_SIDES, DEFAULT_INFOS} from "../../func";
 
-const NavMenu = ({model_names, env_names, logout, setLa, la, setEnv, env}) => {
+const NavMenu = ({model_names, env_names, logout, setLa, la, setEnv}) => {
     const navigate = useNavigate();
     const url = window.location.href.split('/').slice(2);
     const [opt, setOpt] = useState("");
@@ -37,13 +36,13 @@ const NavMenu = ({model_names, env_names, logout, setLa, la, setEnv, env}) => {
     const getOptStyle = () => {
         let opt = "";
         let style = "";
-        if (OPTSTYLES.includes(url[url.length - 1])) {                     // OptResult, ModelRecord, ModelFactor
+        if (DEFAULT_SIDES.includes(url[url.length - 1])) {                     // OptResult, ModelRecord, ModelFactor
             opt = url[url.length - 2];
             style = url[url.length - 1];
-        } else if (OPTS.includes(url[url.length - 1])) {                // Model(Param)
+        } else if (DEFAULT_OPTS.includes(url[url.length - 1])) {                // Model(Param)
             opt = url[url.length - 1];
             style = "param";
-        } else if (INFOS.includes(url[1]) || url[2] === "detail") {     // Information, ModelDetail
+        } else if (DEFAULT_INFOS.includes(url[1]) || url[2] === "detail") {     // Information, ModelDetail
             return {opt, style};
         } else {
             throw new Error("Invalid 'style' or 'opt'!");
@@ -56,14 +55,14 @@ const NavMenu = ({model_names, env_names, logout, setLa, la, setEnv, env}) => {
     };
 
     const getModelUrl = (model) => {
-        if (OPTS.includes(opt) && OPTSTYLES.includes(style)) {     // OptResult, OptRecord, OptFactor
+        if (DEFAULT_OPTS.includes(opt) && DEFAULT_SIDES.includes(style)) {     // OptResult, OptRecord, OptFactor
             navigate(`/${model}/${opt}/${style}`);
-        } else if (OPTS.includes(opt) && style === "param") {   // OptParam
+        } else if (DEFAULT_OPTS.includes(opt) && style === "param") {   // OptParam
             navigate(`/${model}/${opt}`);
         } else if (opt === "" && style === "" &&
-            (INFOS.includes(url[1]) || url[2] === "detail")) {     // Information, ModelDetail
+            (DEFAULT_INFOS.includes(url[1]) || url[2] === "detail")) {     // Information, ModelDetail
             navigate(`/${model}/detail`);
-        } else if (opt === "" && style === "" && OPTS.includes(url[1])) {
+        } else if (opt === "" && style === "" && DEFAULT_OPTS.includes(url[1])) {
             navigate(`/${opt}`);
         } else {
             navigate(`/`)
@@ -72,11 +71,11 @@ const NavMenu = ({model_names, env_names, logout, setLa, la, setEnv, env}) => {
     };
 
     const getOptUrl = (toOpt) => {
-        if (url.length === 3 && model_names.includes(url[1]) && OPTS.includes(opt)) {   // OptParam
+        if (url.length === 3 && model_names.includes(url[1]) && DEFAULT_OPTS.includes(opt)) {   // OptParam
             navigate(`/${url[1]}/${toOpt}`);
         } else if (url.length === 3 && model_names.includes(url[1]) && url[2] === "detail") {   // ModelDetail
             navigate(`/${url[1]}/${toOpt}`)
-        } else if (url.length === 4 && model_names.includes(url[1]) && OPTS.includes(opt) && OPTSTYLES.includes(style)) {
+        } else if (url.length === 4 && model_names.includes(url[1]) && DEFAULT_OPTS.includes(opt) && DEFAULT_SIDES.includes(style)) {
             navigate(`/${url[1]}/${toOpt}/${style}`);
         } else {
             navigate(`/${toOpt}`)

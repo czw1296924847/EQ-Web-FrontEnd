@@ -1,7 +1,7 @@
 import {Modal, Button} from 'antd';
 import FeatureDist from "../dist/FeatureDist";
 import "../information/Information.css";
-import {Trans_FeatureList, WIDTH_MODAL} from "../utils";
+import {Trans_FeatureList, WIDTH_MODAL} from "../func";
 
 
 const DistModal = ({data, feature, open, onCancel, onClick, la}) => {

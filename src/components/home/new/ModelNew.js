@@ -1,14 +1,14 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import {Button, Modal, Alert} from 'antd';
 
 import ModelNewForm from "./ModelNewForm";
 import "../list/ModelList.css";
-import LanguageContext from "../../LanguageContext";
-import {Trans_ModelList} from "../utils";
+import {Trans_ModelList} from "../func";
 import "../../Alert.css";
+import {getStoredLanguage} from "../../func";
 
 const ModelNew = ({resetState}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [msg, setMsg] = useState("");

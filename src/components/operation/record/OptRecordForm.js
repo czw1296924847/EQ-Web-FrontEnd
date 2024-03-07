@@ -1,13 +1,13 @@
-import React, {useContext} from "react";
-import LanguageContext from "../../LanguageContext";
+import React from "react";
 import {Table} from "reactstrap";
 import OptRecordRemove from "./OptRecordRemove";
 import "./OptRecord.css";
-import {Trans_OptRecordForm} from "../utils";
+import {Trans_OptRecordForm} from "../func";
+import {getStoredLanguage} from "../../func";
 
 
 const OptRecordForm = ({infos, resetState, model_name}) => {
-    const {la, setLa} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const color_th = "dimgray";
 
     return (

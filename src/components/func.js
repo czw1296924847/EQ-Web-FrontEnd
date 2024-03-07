@@ -2,6 +2,26 @@ import {ESTIMATE_URL} from "../index";
 import axios from "axios";
 import {Alert} from "antd";
 
+export const DEFAULT_MODELS = ['MagInfoNet', 'EQGraphNet', 'MagNet', 'CREIME', 'ConvNetQuakeINGV'];
+
+export const DEFAULT_OPTS = ['train', 'test'];
+
+export const DEFAULT_SIDES = ["record", "result"];
+
+export const DEFAULT_INFOS = ["home", "inform"]
+
+export const DEFAULT_ENV = "cmh";
+
+export const DEFAULT_LA = "en";
+
+export function ErrorLa(la) {
+    return Error(`Unknown type of 'la' is ${la}, must be 'en' or 'zh'!`);
+}
+
+export function ErrorOpt(opt) {
+    return Error(`Unknown type of 'opt' is ${opt}, must be 'train' or 'test'!`);
+}
+
 export function SimpleAlert(className, message, type, onClose) {
     return (
         <Alert className={className}
@@ -14,11 +34,11 @@ export function SimpleAlert(className, message, type, onClose) {
 }
 
 export function getStoredLanguage() {
-    return localStorage.getItem('la');
+    return localStorage.getItem('la') || DEFAULT_LA;
 }
 
 export function getStoredEnv() {
-    return localStorage.getItem('env');
+    return localStorage.getItem('env') || DEFAULT_ENV;
 }
 
 export function arrayEqual(arr1, arr2) {
@@ -38,9 +58,6 @@ export const onCloseAlert = (e, setShowAlert, setMsg) => {
     setMsg("");
     console.log(e, "Close Alert.")
 };
-
-export const DEFAULT_MODELS = ['MagInfoNet', 'EQGraphNet', 'MagNet', 'CREIME', 'ConvNetQuakeINGV'];
-export const DEFAULT_OPTS = ['train', 'test'];
 
 const Trans_ModelDetail_En = {
     'item': 'Item',
@@ -114,7 +131,7 @@ export function Trans_ModelDetail(la) {
     } else if (la === "zh") {
         return Trans_ModelDetail_Zh;
     } else {
-        throw new Error(`Unknown type of 'la'! ${la}`);
+        throw new ErrorLa(la);
     }
 }
 
@@ -136,7 +153,7 @@ export function Trans_Login_Msg(la) {
     } else if (la === "zh") {
         return Trans_Login_Msg_Zh;
     } else {
-        throw new Error(`Unknown type of 'la'! ${la}`);
+        throw new ErrorLa(la);
     }
 }
 
@@ -207,7 +224,7 @@ export function Trans_Home(la) {
     } else if (la === "zh") {
         return Trans_Home_Zh;
     } else {
-        throw new Error(`Unknown type of 'la'! ${la}`);
+        throw new ErrorLa(la);
     }
 }
 
@@ -224,7 +241,7 @@ export const catContent = (content, addContent) => {
 
 export const clearProcess = async (model_name) => {
     return new Promise((resolve, reject) => {
-        axios.put(ESTIMATE_URL + `${model_name}` + "/process")
+        axios.put(`${ESTIMATE_URL}${model_name}/process`)
             .then(response => {
                 resolve(response.data);
             })

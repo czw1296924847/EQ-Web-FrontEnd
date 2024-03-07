@@ -14,7 +14,7 @@ import TestParam from "./components/operation/test/TestParam";
 import OptResult from "./components/operation/result/OptResult";
 import ModelDetail from "./components/home/detail/ModelDetail";
 import OptRecord from "./components/operation/record/OptRecord";
-import NotFound from "./components/share/error/NotFound";
+// import NotFound from "./components/share/error/NotFound";
 import LanguageContext from "./components/LanguageContext";
 import EnvContext from "./components/EnvContext";
 import {getStoredLanguage, getStoredEnv, arrayEqual, DEFAULT_OPTS, DEFAULT_MODELS} from "./components/func";
@@ -23,28 +23,30 @@ import {ESTIMATE_URL} from "./index";
 
 
 function App() {
-    const [la, setLa] = useState(getStoredLanguage() || "en");
-    const [env, setEnv] = useState(getStoredEnv || "env");
+    const [la, setLa] = useState(getStoredLanguage());
+    const [env, setEnv] = useState(getStoredEnv());
     const [models, setModels] = useState([]);
 
     useEffect(() => {
+
+        const getModels = () => {
+            axios.get(ESTIMATE_URL + "models").then(response => {
+                const data = response.data.map(model => model.name);
+                if (!arrayEqual(data, models)) {
+                    setModels(data);
+                }
+            }).catch(error => {
+                console.error(error);
+            })
+        };
+
+        const resetState = () => {
+            getModels();
+        };
+
         resetState();
     }, [models]);
 
-    const resetState = () => {
-        getModels();
-    };
-
-    const getModels = () => {
-        axios.get(ESTIMATE_URL + "models").then(response => {
-            const data = response.data.map(model => model.name);
-            if (!arrayEqual(data, models)) {
-                setModels(data);
-            }
-        }).catch(error => {
-            console.error(error);
-        })
-    };
 
     return (
         <LanguageContext.Provider value={{la, setLa}}>
@@ -95,7 +97,7 @@ function App() {
                             ))
                         ))}
 
-                        <Route path="*" element={<ReLogin> <NotFound/> </ReLogin>}/>
+                        {/*<Route path="*" element={<ReLogin> <NotFound/> </ReLogin>}/>*/}
                     </Routes>
                 </Router>
             </EnvContext.Provider>

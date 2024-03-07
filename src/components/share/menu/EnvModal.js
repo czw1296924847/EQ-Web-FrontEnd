@@ -1,17 +1,15 @@
-import {Fragment, useContext, useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {Modal, Table} from 'antd';
 import axios from "axios";
 
-import LanguageContext from "../../LanguageContext";
-import EnvContext from "../../EnvContext";
-import {Trans_NavMenu} from "../utils";
+import {Trans_NavMenu} from "../func";
 import {ESTIMATE_URL} from "../../../index";
-import {SimpleAlert, onCloseAlert} from "../../func";
+import {SimpleAlert, onCloseAlert, getStoredLanguage, getStoredEnv} from "../../func";
 import "../../Alert.css";
 
 const EnvModal = ({envModal, handleCancel}) => {
-    const {la, setLa} = useContext(LanguageContext);
-    const {env, setEnv} = useContext(EnvContext);
+    const la = getStoredLanguage();
+    const env = getStoredEnv();
     const [lib, setLib] = useState([]);
     const [showAlert, setShowAlert] = useState(false);
     const [typeAlert, setTypeAlert] = useState("success");

@@ -1,17 +1,16 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import {Table,} from "reactstrap";
 import "./ModelList.css";
-import LanguageContext from "../../LanguageContext";
-import {Trans_ModelList} from "../utils";
-import {UrlButton} from "../../operation/OptParam";
+import {Trans_ModelList} from "../func";
+import {UrlButton} from "../../operation/module";
 import ModelRemove from "../remove/ModelRemove";
-import {SimpleAlert, DEFAULT_MODELS, DEFAULT_OPTS, onCloseAlert} from "../../func";
+import {SimpleAlert, DEFAULT_MODELS, DEFAULT_OPTS, onCloseAlert, getStoredLanguage} from "../../func";
 import {ESTIMATE_URL} from "../../../index";
 
 const ModelList = ({models, resetState}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const navigate = useNavigate();
     const [msg, setMsg] = useState("");
     const [showAlert, setShowAlert] = useState(false);
@@ -86,13 +85,16 @@ const ModelList = ({models, resetState}) => {
                                 <td className='ModelList-Opt'>
                                     {DEFAULT_MODELS.includes(model.name) && (
                                         <>
-                                            {UrlButton(getModelUrl, la, model.name, "train", "ModelList-Button-Train", {})}
+                                            <UrlButton getModelUrl={getModelUrl} la={la} model_name={model.name}
+                                                       toPath={"train"} class_name={"ModelList-Button-Train"} style={{}}/>
                                             {' '}
-                                            {UrlButton(getModelUrl, la, model.name, "test", "ModelList-Button-Test", {})}
+                                            <UrlButton getModelUrl={getModelUrl} la={la} model_name={model.name}
+                                                       toPath={"test"} class_name={"ModelList-Button-Test"} style={{}}/>
                                             {' '}
                                         </>
                                     )}
-                                    {UrlButton(getModelUrl, la, model.name, "detail", "ModelList-Button-Detail", {marginLeft: `${margin_left(model.name)}px`})}
+                                    <UrlButton getModelUrl={getModelUrl} la={la} model_name={model.name}
+                                               toPath={"detail"} class_name={"ModelList-Button-Detail"} style={{marginLeft: `${margin_left(model.name)}px`}}/>
                                     {' '}
                                     <ModelRemove pk={model.pk} resetState={resetState}/>
                                 </td>

@@ -1,6 +1,6 @@
 import {Modal, Button} from 'antd';
 import "../information/Information.css";
-import {Trans_FeatureList, WIDTH_MODAL} from "../utils";
+import {Trans_FeatureList, WIDTH_MODAL} from "../func";
 import SourceLocate from "../locate/SourceLocate";
 
 

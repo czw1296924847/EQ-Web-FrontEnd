@@ -1,13 +1,13 @@
-import React, {useState, useEffect, useContext, Fragment} from "react";
+import React, {useState, Fragment} from "react";
 import {Form, Button, Input} from "antd";
 
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
-import {Trans_ModelList} from "../utils";
-import LanguageContext from "../../LanguageContext";
+import {Trans_ModelList} from "../func";
+import {getStoredLanguage} from "../../func";
 
 const ModelNewForm = ({setShowAlert, setMsg, resetState, handleOk}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
 
     const [state, setState] = useState({
         pk: 0,

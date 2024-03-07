@@ -1,19 +1,18 @@
-import React, {Fragment, useContext, useState, useEffect} from 'react';
+import React, {Fragment, useState} from 'react';
 import {Table} from 'reactstrap';
-import {Button, Modal} from 'antd';
+import {Button} from 'antd';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {solarizedlight} from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import LanguageContext from '../../LanguageContext';
 import './ModelDetailForm.css';
-import {Trans_ModelDetail, handleModalCancel} from '../../func';
+import {Trans_ModelDetail, handleModalCancel, getStoredLanguage} from '../../func';
 import EditModal from './EditModal';
 import UploadModal from './UploadModal';
 import RunModal from "./RunModal";
 
 
 const ModelDetailForm = ({infos, resetState}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const [editModal, setEditModal] = useState(false);
     const [uploadModal, setUploadModal] = useState(false);
     const [runModal, setRunModal] = useState(false);

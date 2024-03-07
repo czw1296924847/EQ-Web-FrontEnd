@@ -1,19 +1,18 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect} from "react";
 import {useNavigate} from 'react-router-dom';
 import {Col, Container, Row} from "reactstrap";
 import {Tooltip} from "antd";
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import ModelDetailForm from "./ModelDetailForm";
-import LanguageContext from "../../LanguageContext";
-import {Trans_ModelList} from "../utils";
-import {Trans_OptParam} from "../../operation/utils";
-import {UrlButton} from "../../operation/OptParam";
-import {DEFAULT_MODELS} from "../../func";
+import {Trans_ModelList} from "../func";
+import {Trans_OptParam} from "../../operation/func";
+import {UrlButton} from "../../operation/module";
+import {DEFAULT_MODELS, getStoredLanguage} from "../../func";
 
 
 const ModelDetail = () => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const navigate = useNavigate();
 
     const url = window.location.href.split('/').slice(2);
@@ -59,8 +58,12 @@ const ModelDetail = () => {
                                   onClick={() => getInfoUrl()}>{Trans_ModelList(la)['detail_info']}</span>
                         </Tooltip>
                     </h1>
-                    {isDefaultModel && UrlButton(getModelUrl, la, model_name, "test", "ModelDetail-Test-Button", {marginLeft: `-${size}px`})}
-                    {isDefaultModel && UrlButton(getModelUrl, la, model_name, "train", "ModelDetail-Train-Button", {marginLeft: `-${size}px`})}
+                    {isDefaultModel
+                        && <UrlButton getModelUrl={getModelUrl} la={la} model_name={model_name} toPath={"test"}
+                                      class_name={"ModelDetail-Test-Button"} style={{marginLeft: `-${size}px`}}/>}
+                    {isDefaultModel
+                        && <UrlButton getModelUrl={getModelUrl} la={la} model_name={model_name} toPath={"train"}
+                                      class_name={"ModelDetail-Train-Button"} style={{marginLeft: `-${size}px`}}/>}
                 </div>
                 <Col>
                     <ModelDetailForm infos={infos} resetState={resetState}/>

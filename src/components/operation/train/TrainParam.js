@@ -1,52 +1,35 @@
-import React, {useEffect, useState, useContext, Fragment} from "react";
+import React, {useEffect, useState, Fragment} from "react";
 import {
     OptInput, OptOutput, OptTitle, OptAlert, OptProcess,
-    GUTTER_SIZE,
-} from "../OptParam";
+} from "../module";
 import {Container} from "reactstrap";
-import LanguageContext from "../../LanguageContext";
 import {Row} from 'antd';
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import {
     getStateValue, Trans_OptParam, splitProcess, tranProcess, checkRecord, getParam, getCalTime,
     catStr, getParams, resetResults,
-} from "../utils";
+    GUTTER_SIZE, PARAMS_TRAIN, RESULTS_TRAIN_TEST,
+} from "../func";
 import "../Opt.css";
 import "../../Alert.css";
-import {catContent, clearProcess, DEFAULT_MODELS} from "../../func";
+import {catContent, clearProcess, getStoredLanguage} from "../../func";
 
 const TrainParam = () => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
 
     const url = window.location.href.split('/').slice(2);
-    const [model_name, setModelName] = useState(url[url.length - 2]);
-    const [opt, setOpt] = useState(url[url.length - 1]);
-    const [params, setParams] = useState([
-        {name: "device", value: "cuda:1"},
-        {name: "lr", value: "0.0005"},
-        {name: "batch_size", value: "64"},
-        {name: "epochs", value: "10"},
-        {name: "train_ratio", value: "0.75"},
-        {name: "data_size", value: "1000"},
-        {name: "sm_scale", value: "ml"},
-        {name: "chunk_name", value: "chunk2"},
-    ]);
-    const [results, setResults] = useState([
-        {name: "r2", value: ""},
-        {name: "rmse", value: ""},
-        {name: "e_mean", value: ""},
-        {name: "e_std", value: ""},
-        {name: "pred", value: ""},
-        {name: "true", value: ""},
-    ]);
+    const model_name = url[url.length - 2]
+    const opt = url[url.length - 1]
+    const optStyle = "param";
+
+    const [params, setParams] = useState(PARAMS_TRAIN);
+    const [results, setResults] = useState(RESULTS_TRAIN_TEST);
     const [msg, setMsg] = useState("");
     const [status, setStatus] = useState("");
     const [typeAlert, setTypeAlert] = useState("");
     const [process, setProcess] = useState("");
     const [showAlert, setShowAlert] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
-    const [optStyle, setOptStyle] = useState("param");
     const [isEnd, setIsEnd] = useState(true);
 
     let interval = null;

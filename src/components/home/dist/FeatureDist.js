@@ -1,12 +1,11 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Column} from '@ant-design/plots';
-import LanguageContext from "../../LanguageContext";
-import {WIDTH_MODAL} from "../utils";
-import {Trans_FeatureList} from "../utils";
+import {WIDTH_MODAL, Trans_FeatureList} from "../func";
+import {getStoredLanguage} from "../../func";
 
 
 const FeatureDist = ({data, feature}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
 
     const config = {
         data: data,

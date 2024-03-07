@@ -1,7 +1,7 @@
 import {Layout, Menu} from 'antd';
 import {ProfileOutlined, ImportOutlined, ToolOutlined, CarryOutOutlined,} from '@ant-design/icons';
 import "../MyLayout.css";
-import {Trans_SubNavMenu} from "../utils";
+import {Trans_SubNavMenu} from "../func";
 
 const {Sider} = Layout;
 const SubNavMenu_Icon_Size = 22;
@@ -37,16 +37,14 @@ const SubNavMenu = ({getSubNavUrl, showSider, background, la}) => {
 
     return (
         showSider() &&
-        <Sider
-            width={170}
-            style={{background: background}}>
-            <Menu
-                style={{marginTop: 15}}
-                theme="light"
-                mode="inline"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-                items={SubNavMenuItem}/>
+        <Sider width={170}
+               style={{background: background}}>
+            <Menu style={{marginTop: 15}}
+                  theme="light"
+                  mode="inline"
+                  defaultSelectedKeys={['1']}
+                  defaultOpenKeys={['sub1']}
+                  items={SubNavMenuItem}/>
         </Sider>
     );
 }

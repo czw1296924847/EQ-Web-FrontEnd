@@ -1,10 +1,10 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Scatter} from '@ant-design/plots';
-import {WIDTH_PLOT, Trans_OptResult} from "../utils";
-import LanguageContext from "../../LanguageContext";
+import {WIDTH_PLOT, Trans_OptResult} from "../func";
+import {getStoredLanguage} from "../../func";
 
 const CompTruePred = ({data}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
 
     const config = {
         data: data,

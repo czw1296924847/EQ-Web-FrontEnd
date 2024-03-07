@@ -1,12 +1,12 @@
-import React, {useState, useEffect, useContext} from "react";
-import {OptInput, OptTitle, GUTTER_SIZE} from "../OptParam";
+import React, {useState} from "react";
+import {OptInput, OptTitle} from "../module";
 import {Container} from "reactstrap";
-import LanguageContext from "../../LanguageContext";
 import {Row, Col, Input, Alert} from 'antd';
 import {
     getWidthInput, Trans_OptResult, getStateValue,
     Trans_Model_Output_Label, isExistRecord, getParams,
-} from "../utils";
+    PARAMS_TEST, GUTTER_SIZE, RESULTS_RESULT,
+} from "../func";
 
 import axios from "axios";
 import CompTruePred from "./CompTruePred";
@@ -14,28 +14,19 @@ import {ESTIMATE_URL} from "../../../index";
 import LossHistory from "./LossHistory";
 import "../Opt.css";
 import "./OptResult.css";
+import {getStoredLanguage} from "../../func";
 
 const OptResult = () => {
-    const {la, _} = useContext(LanguageContext);
-
+    const la = getStoredLanguage();
     const url = window.location.href.split('/').slice(2);
-    const [model_name, setModelName] = useState(url[url.length - 3]);
-    const [opt, setOpt] = useState(url[url.length - 2]);
-    const [params, setParams] = useState([
-        {name: "train_ratio", value: "0.75"},
-        {name: "data_size", value: "200000"},
-        {name: "sm_scale", value: "ml"},
-        {name: "chunk_name", value: "chunk2"},
-    ]);
-    const [results, setResults] = useState([
-        {name: "r2", value: 0},
-        {name: "rmse", value: 0},
-        {name: "e_mean", value: 0},
-        {name: "e_std", value: 0},
-    ]);
+    const model_name = url[url.length - 3]
+    const opt = url[url.length - 2]
+    const optStyle = "result";
+
+    const [params, setParams] = useState(PARAMS_TEST);
+    const [results, setResults] = useState(RESULTS_RESULT);
     const [true_pred, setTruePred] = useState([]);
     const [loss, setLoss] = useState([]);
-    const [optStyle, setOptStyle] = useState("result");
     const [show_who, setShowWho] = useState("");
     const [showAlert, setShowAlert] = useState(false);
     const [msg, setMsg] = useState("");

@@ -1,9 +1,11 @@
-import {Fragment, useContext, useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {Input, Modal} from 'antd';
 import axios from "axios";
 
-import LanguageContext from "../../LanguageContext";
-import {SimpleAlert, catContent, clearProcess, DEFAULT_MODELS, Trans_ModelDetail, onCloseAlert} from "../../func";
+import {
+    SimpleAlert, catContent, clearProcess, Trans_ModelDetail, onCloseAlert, getStoredLanguage,
+    DEFAULT_MODELS,
+} from "../../func";
 import {ESTIMATE_URL} from "../../../index";
 import "../../Alert.css";
 
@@ -11,7 +13,7 @@ const {TextArea} = Input;
 
 
 const RunModal = ({items_upload, resetState, info, selectKey, modal, handleCancel}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const [changeValue, setChangeValue] = useState();
     const [msg, setMsg] = useState("");
     const [showAlert, setShowAlert] = useState(false);

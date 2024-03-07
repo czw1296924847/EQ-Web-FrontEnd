@@ -3,13 +3,6 @@ import {Trans_Home} from "../func";
 import "./Opt.css";
 
 
-const Opt = () => {
-    return null;
-};
-
-export default Opt;
-
-
 export const initNode = (ids, xs, ys, la) => {
     if (ids.length !== xs.length || ids.length !== ys.length) {
         throw new Error('All input arrays must have the same length');

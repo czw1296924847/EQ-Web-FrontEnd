@@ -1,12 +1,11 @@
-import React, {useContext, useEffect} from 'react';
-import {Input} from 'antd';
+import React from 'react';
 import "./Login.css";
-import LanguageContext from "../../LanguageContext";
-import {Trans_Login, getLeftUserPass} from "../utils";
+import {Trans_Login, getLeftUserPass} from "../func";
+import {getStoredLanguage} from "../../func";
 
 
 const LoginForm = ({ onSubmit, username, password, setUsername, setPassword }) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const {left_u, left_p} = getLeftUserPass(la);
 
     const handleUsernameChange = (event) => {

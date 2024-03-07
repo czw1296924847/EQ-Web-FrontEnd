@@ -1,16 +1,15 @@
-import React, {Fragment, useState, useContext} from "react";
+import React, {Fragment, useState} from "react";
 import {Modal, ModalHeader, ModalFooter} from "reactstrap";
 import {Button} from "antd";
 
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import "../list/ModelList.css";
-import {Trans_ModelList} from "../utils";
-import LanguageContext from "../../LanguageContext";
-import {onCloseAlert, SimpleAlert} from "../../func";
+import {Trans_ModelList} from "../func";
+import {getStoredLanguage, onCloseAlert, SimpleAlert} from "../../func";
 
 const ModelRemove = ({pk, resetState}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
 
     const [showAlert, setShowAlert] = useState(false);
     const [msg, setMsg] = useState("");

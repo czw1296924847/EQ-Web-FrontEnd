@@ -1,12 +1,10 @@
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 import {Scene, PointLayer} from '@antv/l7';
 import {GaodeMap} from '@antv/l7-maps';
-import LanguageContext from "../../LanguageContext";
-import {WIDTH_MODAL} from "../utils";
+import {WIDTH_MODAL} from "../func";
 
 
 const SourceLocate = ({data, loMin, loMax, laMin, laMax}) => {
-    const {la, _} = useContext(LanguageContext);
     const center = [(loMin + loMax) / 2, (laMin + laMax) / 2];
 
     useEffect(() => {

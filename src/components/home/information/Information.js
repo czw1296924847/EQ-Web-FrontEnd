@@ -1,16 +1,16 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Container, Row, Col} from "reactstrap";
 import axios from "axios";
 import {ESTIMATE_URL} from "../../../index";
 import ModelList from "../list/ModelList";
-import LanguageContext from "../../LanguageContext";
 import ModelNew from "../new/ModelNew";
-import {Trans_ModelList} from "../utils";
+import {Trans_ModelList} from "../func";
 import "./Information.css";
 import FeatureList from "../list/FeatureList";
+import {getStoredLanguage} from "../../func";
 
 const Information = ({}) => {
-    const {la, _} = useContext(LanguageContext);
+    const la = getStoredLanguage();
     const [models, setModels] = useState([]);
     const [features, setFeatures] = useState([]);
 
