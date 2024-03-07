@@ -98,7 +98,9 @@ Training Code:  the code for training model
 Testing Code:   the code for testing model
 Running Code:   the code for running program
 ```
-TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html). You can click $\text{\color{lightgrey}{Run}}$ button and get <br>
+TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html). <br>
+
+In `data_code` and `run_code`, you can click $\text{\color{lightgrey}{Run}}$ button and get running results. <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/TestNet_code_data.png) <br>
 
