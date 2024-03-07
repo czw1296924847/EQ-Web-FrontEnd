@@ -1,0 +1,87 @@
+.MyLayout-NavMenu-Title {
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+}
+
+.MyLayout-NavMenu-Title:link {
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+}
+
+.MyLayout-NavMenu-SubTitle {
+    margin-left: 20px;
+    margin-right: 30px;
+    font-size: 15px;
+    text-decoration: none;
+    color: deepskyblue;
+}
+
+.MyLayout-NavMenu-Label-First {
+    /*margin-right: 10%;*/
+    font-size: 23px;
+    text-decoration: none;
+}
+
+.MyLayout-NavMenuElement-Label-First {
+    /*margin-left: 21px;*/
+    font-size: 21px;
+    text-decoration: none;
+}
+
+.MyLayout-NavMenu-Label {
+    /*margin-right: 10%;*/
+    font-size: 23px;
+    /*margin-left: 55%;*/
+}
+
+.MyLayout-NavMenuElement-Label {
+    font-size: 21px;
+    text-decoration: none;
+}
+
+.MyLayout-NavMenu-Label-Logout {
+    font-size: 21px;
+    /*margin-left: 10%;*/
+    text-decoration: none;
+    /*color: palegreen;*/
+}
+
+.MyLayout-NavMenu-Label-Env {
+    font-size: 21px;
+    text-decoration: none;
+}
+
+.MyLayout-SubNavMenu-label {
+    margin-top: 10px;
+    font-size: 21px;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.MyLayout-Content {
+    padding: 24px;
+    margin: 0;
+    min-height: 280px;
+}
+
+.MyLayout-H1-Model {
+    font-weight: bold;
+    color: black;
+}
+
+.MyLayout-H1-Opt {
+    font-weight: bold;
+    color: mediumvioletred;
+    text-decoration: none;
+}
+
+.MyLayout-H1-Opt:hover {
+    color: mediumvioletred;
+}
+
+.MyLayout-H1-Inform {
+    font-weight: bold;
+    color: black;
+}
