@@ -38,7 +38,7 @@ where in our example, host = 127.0.0.1 and port = 8080. Then you will see <br>
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/inform.png)<br><br>
 
 ### 2. Change Language
-You can change the language including `English` and `Chinese` in **setting** >> **Language** <br>
+You can change the language including `English` and `Chinese` in **Setting** >> **Language** <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/change_language.png)<br><br>
 
@@ -48,7 +48,7 @@ We provide some deep learning models for magnitude estimation, and the used data
 Select one of `MagInfoNet`, `EQGraphNet`, `MagNet`, `CREIME`, `ConvNetQuakeINGV`, and click the button to perform some operation of Magnitude Estimation Task.
 
 #### 3.1. Python Environment
-You can show the libraries of current Python Environment in **setting** >> **Environment** >> **{your_env_name}** <br>
+You can show the libraries of current Python Environment in **Setting** >> **Environment** >> **{your_env_name}** <br>
 
 ![image](https://github.com/zw-Ch/EQ-Web-FrontEnd/blob/main/image/python_env.png)<br><br>
 
