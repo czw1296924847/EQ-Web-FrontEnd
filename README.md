@@ -107,77 +107,80 @@ TestNet codes are from [https://pytorch.org/tutorials/beginner/basics/quickstart
 ## Project Structure
 ```
 App.css
-App.js          # root component, routing management
+App.js              # root component, routing management
 App.test.js
 components/
-    Alert.css       # style of Alert Box
-    func.js
+    Alert.css           # style of Alert Box
+    EnvContext.js       # Global, Python Environment
+    LanguageContext.js  # Global, Language Style
+    func.js             # Public Function
     home/
-        detail/                 # 'Detail' page
-            EditModal.js            # Edit and update content
+        detail/                     # 'Detail' page, show detail information of model
+            EditModal.js                # Edit and update content
             ModelDetailForm.css
-            ModelDetailForm.js
-            ModelDetail.js          # Show detail information of model
-            RunModal.js             # Run Pyton code
-            UploadModal.js          # Upload .py and update content
+            ModelDetailForm.js          # Table of detail information
+            ModelDetail.js
+            RunModal.js                 # Run Pyton code
+            UploadModal.js              # Upload .py and update content
         dist/
             FeatureDist.js
         Home.css
         Home.js
-        information/            # 'Information' page
+        func.js                     # Public Function
+        information/                # 'Information' page
             Information.css
-            Information.js
-        list/                   # Show Model information and DataSet information
-            DistModal.js            # Draw value distribution
-            FeatureList.js          # Show feature information of STEAD
-            LocateModal.js          # Draw location of source or station
+            Information.js              # Model Information and Dataset Feature
+        list/                       # Show Model information and DataSet Feature
+            DistModal.js                # Draw value distribution of dataset feature
+            FeatureList.js              # Dataset feature
+            LocateModal.js              # Draw location of source or station
             ModelList.css
-            ModelList.js
+            ModelList.js                # Model information
         locate/
-            SourceLocate.js         # Draw source distribution
-        login/                  # 'Login' page
+            SourceLocate.js             # Draw source distribution
+        login/                      # 'Login' page
             Login.css
-            LoginForm.js            # Login submission form
+            LoginForm.js                # Login submission form, including username and password
             Login.js
-            ReLogin.js              # If not logged in, redirect to 'Login' page
-        new/                    # Create new model
-            ModelNewForm.js
+            ReLogin.js                  # If not logged in, redirect to 'Login' page
+        new/                        # Create new model
+            ModelNewForm.js             # New model submission form
             ModelNew.js
-        remove/                 # Delete model
+        remove/                     # Delete model
             ModelRemove.js
-        utils.js
-    LanguageContext.js
     operation/
+        func.js                     # Public Function
+        module.js                   # Public Module
         Opt.css
-        Opt.js                  # Common components for operation
-        OptParam.js             # 'Param' page
-        record/                 # 'Record' page
+        Opt.js                      # Common components for operation
+        OptParam.js                 # 'Param' page
+        record/                     # 'Record' page
             OptRecord.css
             OptRecordForm.js
             OptRecord.js
             OptRecordRemove.js
-        result/                 # 'Result' page
-            CompTruePred.js         # Draw estimated results and true magnitudes
-            LossHistory.js          # Draw the loss values during iteration process
+        result/                     # 'Result' page
+            CompTruePred.js             # Draw estimated results and true magnitudes
+            LossHistory.js              # Draw the loss values during iteration process
             OptResult.css
-            OptResult.js            # Show results of training or testing
+            OptResult.js                # Show results of training or testing
         test/
             Test.js
-            TestParam.js            # Model testing
+            TestParam.js                # Model testing
         train/
             Train.js
-            TrainParam.js           # Model training
-        utils.js
+            TrainParam.js               # Model training
     share/
-        error/                  # when the web page does not exist
+        error/                      # when the web page does not exist
             NotFound.js
+        func.js                     # Public Function
         Header.css
         Header.js
         menu/
-            NavMenu.js              # Navigation bar menu
-            SubNavMenu.js           # Sidebar menu
+            NavMenu.js                  # Navigation bar menu
+            SubNavMenu.js               # Sidebar menu
         MyLayout.css
-        MyLayout.js             # Public component, for displaying the menu bar
+        MyLayout.js                 # Displaying the menu and side bar
         utils.js
 index.css
 index.js
