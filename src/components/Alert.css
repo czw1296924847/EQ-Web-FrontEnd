@@ -1,0 +1,88 @@
+.Login-Alert {
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 100px;
+    font-size: 22px;
+}
+
+.Env-Alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 50px;
+    font-size: 22px;
+    z-index: 9999;
+}
+
+.CalDist-Alert {
+    position: relative;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -1250%);
+    width: 600px;
+    height: 50px;
+    font-size: 22px;
+}
+
+.Opt-Alert {
+    position: relative;
+    top: 80%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 50px;
+    font-size: 22px;
+}
+
+.OptResult-Alert {
+    position: relative;
+    top: 50%;
+    left: 7%;
+    transform: translate(-50%, -50%);
+    font-size: 21px;
+}
+
+.ModelList-Alert-Create {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 50px;
+    font-size: 22px;
+}
+
+.ModelList-Alert-Delete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 50px;
+    font-size: 22px;
+}
+
+.ModelList-Alert-Complete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 50px;
+    font-size: 22px;
+}
+
+.ModelDetail-Wait-Alert {
+    position: fixed;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 50px;
+    font-size: 22px;
+}
