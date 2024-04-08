@@ -20,6 +20,8 @@ import EnvContext from "./components/EnvContext";
 import {getStoredLanguage, getStoredEnv, arrayEqual, DEFAULT_OPTS, DEFAULT_MODELS} from "./components/func";
 import "./App.css";
 import {ESTIMATE_URL} from "./index";
+import Crawler from "./components/crawler/Crawler";
+import WeaLayout from "./components/crawler/WeaLayout";
 
 
 function App() {
@@ -98,6 +100,10 @@ function App() {
                         ))}
 
                         {/*<Route path="*" element={<ReLogin> <NotFound/> </ReLogin>}/>*/}
+
+                        <Route path={`/crawler`}
+                               element={<WeaLayout> <ReLogin> <Crawler/> </ReLogin> </WeaLayout>} />
+
                     </Routes>
                 </Router>
             </EnvContext.Provider>

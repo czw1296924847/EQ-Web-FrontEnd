@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 export const ESTIMATE_URL = "http://10.181.8.163:8000/estimate/";
+export const WEATHER_URL = "http://10.181.8.163:8000/weather/";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
